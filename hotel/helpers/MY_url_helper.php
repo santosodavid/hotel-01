@@ -65,3 +65,14 @@ function theme_css($uri, $tag = false) {
 
     return theme_url('assets/css/' . $uri);
 }
+
+function theme_css_custom($uri, $tag = false) {
+    if ($tag) {
+        $media = false;
+        if (is_string($tag)) {
+            $media = 'media="' . $tag . '"';
+        }
+        return '<link href="' . theme_url($uri) . '" type="text/css" rel="stylesheet" ' . $media . '/>';
+    }
+    return theme_url($uri);
+}

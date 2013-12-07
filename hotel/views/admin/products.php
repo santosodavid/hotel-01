@@ -99,7 +99,7 @@ if (!empty($term)):
 <table class="table table-striped">
     <thead>
         <tr>
-            <th><?php echo sort_url('code', 'code', $order_by, $sort_order, $code, $this->config->item('admin_folder')); ?></th>
+            <th><?php echo sort_url('sku', 'sku', $order_by, $sort_order, $code, $this->config->item('admin_folder')); ?></th>
             <th><?php echo sort_url('name', 'name', $order_by, $sort_order, $code, $this->config->item('admin_folder')); ?></th>
             <th><?php echo sort_url('price', 'price', $order_by, $sort_order, $code, $this->config->item('admin_folder')); ?></th>
             <th><?php echo sort_url('saleprice', 'saleprice', $order_by, $sort_order, $code, $this->config->item('admin_folder')); ?></th>

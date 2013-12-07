@@ -124,11 +124,11 @@ class Products extends Admin_Controller {
         $this->lang->load('digital_product');
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 
-        //$data['categories']		= $this->Category_model->get_categories_tierd();
+        //$data['categories']	= $this->Category_model->get_categories_tierd();
         //$data['product_list']	= $this->Product_model->get_products();
 
+        $data['categories']	= $this->Category_model->get_categories();
         $data['file_list'] = $this->Digital_Product_model->get_list();
-
         $data['page_title'] = lang('post_form');
 
         //default values are empty if the product is new
@@ -149,6 +149,8 @@ class Products extends Admin_Controller {
         $data['images'] = array();
         $data['product_files'] = array();
 
+        $data['category_id']	= '';
+        
         //create the photos array for later use
         $data['photos'] = array();
 

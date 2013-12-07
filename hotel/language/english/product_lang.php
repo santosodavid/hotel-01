@@ -11,10 +11,10 @@ $lang['code']                                   = 'Code';
 $lang['weekendprice']                                = 'Weekend of Price';
 
 
-$lang['products']					= 'Products';
+$lang['products']					= 'Posts';
 $lang['search_term']				= 'Search Term';
-$lang['product_form']				= 'Product Form';
-$lang['sku']						= 'SKU';
+$lang['product_form']				= 'Post Form';
+$lang['sku']						= 'Code';
 $lang['value']						= 'Value';
 $lang['limit']						= 'Limit';
 $lang['seo_title']					= 'Title Tag';
@@ -27,19 +27,19 @@ $lang['enabled']					= 'Enabled';
 $lang['disabled']					= 'Disabled';
 $lang['excerpt']					= 'Excerpt';
 $lang['price']						= 'Price';
-$lang['saleprice']					= 'Sale Price';
+$lang['saleprice']					= 'Weekend Price';
 $lang['weight']						= 'Weight';
 $lang['attributes']					= 'Attributes';
 $lang['categories']					= 'Categories';
 $lang['add_category']				= 'Add Category';
 $lang['header_information']			= 'SEO Information';
 $lang['options']					= 'Options';
-$lang['related_products']			= 'Related Products';
+$lang['related_products']			= 'Related Posts';
 $lang['images']						= 'Images';
-$lang['meta_example']				= 'ex. &lt;meta name="description" content="We sell products that help you" /&gt;';
+$lang['meta_example']				= 'ex. &lt;meta name="description" content="We sell posts that help you" /&gt;';
 $lang['bulk_save']					= 'Bulk Save';
-$lang['add_new_product']			= 'Add New Product';
-$lang['no_products']				= 'There are currently no products.';
+$lang['add_new_product']			= 'Add New Post';
+$lang['no_products']				= 'There are currently no posts.';
 $lang['track_stock']				= 'Track Stock';
 $lang['do_not_track_stock']			= 'Do Not Track Stock';
 $lang['out_of_stock']				= 'Out of Stock';
@@ -52,9 +52,9 @@ $lang['quantity']					= 'Available Quantity';
 $lang['copy']						= 'Copy';
 $lang['upload']						= 'Upload';
 $lang['digital_content']			= 'Digital Content';
-$lang['digital_products_desc']		= 'Associate downloadable files with this product.';
+$lang['digital_products_desc']		= 'Associate downloadable files with this post.';
 $lang['fixed_quantity_note']		= '(This restricts someone from adding multiple copies of the item to their cart.)';
-$lang['quantity_in_stock_note']		= '(This figure will only be used if the product is marked "Track Stock")';
+$lang['quantity_in_stock_note']		= '(This figure will only be used if the post is marked "Track Stock")';
 $lang['filter_by_category']			= 'Filter by Category';
 $lang['select_a_category']			= 'Search for a Category';
 $lang['inventory']					= 'Inventory';
@@ -74,9 +74,9 @@ $lang['required']					= 'Required';
 $lang['add_item']					= 'Add Option Item';
 
 //related products
-$lang['select_a_product']			= 'Search for a related product.';
-$lang['add_related_product']		= 'Add Related Product';
-$lang['product_name']				= 'Product Name';
+$lang['select_a_product']			= 'Search for a related post.';
+$lang['add_related_product']		= 'Add Related Post';
+$lang['product_name']				= 'Post Name';
 
 //product images
 $lang['primary']					= 'Main Image';
@@ -90,17 +90,17 @@ $lang['confirm_remove_value']		= 'Are you sure you want to remove this value?';
 $lang['confirm_remove_option']		= 'Are you sure you want to remove this option?';
 $lang['confirm_remove_related']		= 'Are you sure you want to remove this related item?';
 $lang['confirm_remove_category']	= 'Are you sure you want to remove this category?';
-$lang['confirm_delete_product']		= 'Are you sure you want to delete this product?';
+$lang['confirm_delete_product']		= 'Are you sure you want to delete this post?';
 
 //alerts
 $lang['alert_must_name_option']		= 'You must give this option a name.';
-$lang['alert_product_related']		= 'This product is already related.';
-$lang['alert_select_product']		= 'Please select a product to add first.';
+$lang['alert_product_related']		= 'This post is already related.';
+$lang['alert_select_product']		= 'Please select a post to add first.';
 
 //messages & errors
-$lang['message_saved_product']		= 'The product has been saved.';
-$lang['message_bulk_update']		= 'Your products have been updated.';
-$lang['message_deleted_product']	= 'The product has been deleted.';
-$lang['error_not_found']			= 'The requested product could not be found.';
-$lang['error_bulk_no_products']		= 'There are no products selected to bulk update';
+$lang['message_saved_product']		= 'The post has been saved.';
+$lang['message_bulk_update']		= 'Your posts have been updated.';
+$lang['message_deleted_product']	= 'The post has been deleted.';
+$lang['error_not_found']			= 'The requested post could not be found.';
+$lang['error_bulk_no_products']		= 'There are no posts selected to bulk update';
 $lang['search_returned']			= 'Your searched returned %d result(s)';

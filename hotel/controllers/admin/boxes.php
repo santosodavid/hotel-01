@@ -42,7 +42,7 @@ class Boxes extends Admin_Controller
 		
 		$config['upload_path']		= 'uploads';
 		$config['allowed_types']	= 'gif|jpg|png';
-		$config['max_size']			= $this->config->item('size_limit');
+		$config['max_size']		= $this->config->item('size_limit');
 		$config['max_width']		= '1024';
 		$config['max_height']		= '768';
 		$config['encrypt_name']		= true;
@@ -63,7 +63,7 @@ class Boxes extends Admin_Controller
 						);
 		if($id)
 		{
-			$data				= (array) $this->Box_model->get_box($id);
+			$data			= (array) $this->Box_model->get_box($id);
 			$data['enable_on']	= format_mdy($data['enable_on']);
 			$data['disable_on']	= format_mdy($data['disable_on']);
 			$data['new_window']	= (bool) $data['new_window'];
@@ -110,8 +110,14 @@ class Boxes extends Admin_Controller
 							unlink($file);
 						}
 					}
+                                        //$this->session->set_flashdata('message', lang('message_box_saved'));
 				}
-				
+                                else
+                                { 
+                                        $data['error']	= $this->upload->display_errors();
+					$this->load->view($this->config->item('admin_folder').'/box_form', $data);
+					return; //end script here if there is an error
+                                }
 			}
 			else
 			{
@@ -125,13 +131,14 @@ class Boxes extends Admin_Controller
 			
 			if($uploaded)
 			{
-				$image			= $this->upload->data();
+				$image		= $this->upload->data();
 				$save['image']	= $image['file_name'];
+                                $this->session->set_flashdata('message', lang('message_box_saved'));
 			}
 			
 			$this->Box_model->save($save);
 			
-			$this->session->set_flashdata('message', lang('message_box_saved'));
+			//$this->session->set_flashdata('message', lang('message_box_saved'));
 			
 			redirect($this->config->item('admin_folder').'/boxes');
 		}	

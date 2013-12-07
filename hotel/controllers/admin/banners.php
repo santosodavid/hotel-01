@@ -115,7 +115,12 @@ class Banners extends Admin_Controller
 						}
 					}
 				}
-				
+                                else
+                                {
+                                    $data['error']	= $this->upload->display_errors();
+                                    $this->load->view($this->config->item('admin_folder').'/banner_form', $data);
+                                    return; //end script here if there is an error
+                                }
 			}
 			else
 			{

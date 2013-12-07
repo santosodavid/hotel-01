@@ -1,0 +1,27 @@
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+
+body#home {
+    background: #172c40 url(../image/skin/bg.png) repeat-x top left;
+}
+
+#home .mainContainer {
+    margin: 0 auto;
+    padding-top: 55px;
+    position: relative;
+}
+
+.mainWrapper {
+    margin: 0 auto;
+    position: relative;
+    width: 955px;
+    z-index: 2;
+}
+
+.header {
+    position: relative;
+    width: 955px;
+    z-index: 999;
+}
