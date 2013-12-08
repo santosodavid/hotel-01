@@ -20,7 +20,7 @@ $GLOBALS['option_value_count'] = 0;
             //options related
             var ct	= $('#option_list').children().size();
             // set initial count
-                                
+                                    
 <?php endif; ?>
 
         photos_sortable();
@@ -70,8 +70,7 @@ $GLOBALS['option_value_count'] = 0;
                     ?>
                     <li><a href="#product_downloads" data-toggle="tab"><?php echo lang('digital_content'); ?></a></li>
                 <?php endif; ?>
-<!--                <li><a href="#product_categories" data-toggle="tab"><?php echo lang('categories'); ?></a></li>-->
-<!--                <li><a href="#product_related" data-toggle="tab"><?php echo lang('related_products'); ?></a></li>-->
+                <li><a href="#product_related" data-toggle="tab"><?php echo lang('related_products'); ?></a></li>
                 <li><a href="#product_photos" data-toggle="tab"><?php echo lang('images'); ?></a></li>
             </ul>
         </div>
@@ -349,10 +348,11 @@ $GLOBALS['option_value_count'] = 0;
         $data = array('name' => 'saleprice', 'value' => set_value('saleprice', $saleprice), 'class' => 'span4');
         echo form_input($data);
         ?>
- 
+
         <label for="categories_id"><?php echo lang('categories'); ?></label>
         <?php
-        $category_ids = array();
+        $category_ids = array('' => '----');
+
         foreach ($categories as $c) {
             $category_ids[$c->id] = $c->name;
         }

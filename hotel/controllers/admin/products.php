@@ -148,7 +148,6 @@ class Products extends Admin_Controller {
         $data['product_categories'] = array();
         $data['images'] = array();
         $data['product_files'] = array();
-
         $data['category_id']	= '';
         
         //create the photos array for later use
@@ -184,6 +183,7 @@ class Products extends Admin_Controller {
             $data['excerpt'] = $product->excerpt;
             $data['price'] = $product->price;
             $data['saleprice'] = $product->saleprice;
+            $data['category_id'] = $product->category_id;
             //$data['taxable'] = $product->taxable;
             $data['enabled'] = $product->enabled;
 
@@ -218,6 +218,7 @@ class Products extends Admin_Controller {
         $this->form_validation->set_rules('saleprice', 'lang:saleprice', 'trim|numeric|floatval');
         //$this->form_validation->set_rules('taxable', 'lang:taxable', 'trim|numeric');
         $this->form_validation->set_rules('enabled', 'lang:enabled', 'trim|numeric');
+        $this->form_validation->set_rules('category_id', 'lang:categories', 'required|is_natural');
 
         /*
           if we've posted already, get the photo stuff and organize it
@@ -276,6 +277,7 @@ class Products extends Admin_Controller {
             $save['excerpt'] = $this->input->post('excerpt');
             $save['price'] = $this->input->post('price');
             $save['saleprice'] = $this->input->post('saleprice');
+            $save['category_id'] = $this->input->post('category_id');
             //$save['taxable'] = $this->input->post('taxable');
             $save['enabled'] = $this->input->post('enabled');
             $post_images = $this->input->post('images');

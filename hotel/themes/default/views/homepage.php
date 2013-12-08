@@ -52,12 +52,42 @@
     <form class="form-inline" />
     <div class="row-fluid home">
         <div class="span3">
-            <div class="room_selector" data-price="34" data-adults="1" data-kids="1">
-<!--                        <h5><a href="#" class="pull-left"><i class="icon-chevron-left"></i></a>Single room<a href="#" class="pull-right "><i class="icon-chevron-right"></i></a></h5>
-                <a href="listings.html"><img src="css/images/rooms/single_room.jpg" alt="" /></a>-->
+<!--            <div class="room_selector" data-price="34" data-adults="1" data-kids="1">
+                        <h5><a href="#" class="pull-left"><i class="icon-chevron-left"></i></a>Single room<a href="#" class="pull-right "><i class="icon-chevron-right"></i></a></h5>
+                <a href="listings.html"><img src="css/images/rooms/single_room.jpg" alt="" /></a>
                 <p>All single rooms have one single bed and sleeps one adult. A 25-inch TV is included.</p>
-            </div>
+            </div>-->
 
+        <?php 
+            $active_one	= 'display: none;';
+            $index=0;
+            foreach ($rooms as $item):
+                $photo	= theme_img('no_picture.png', lang('no_image_available'));
+                $item->images	= array_values($item->images);
+            
+                if(!empty($item->images[0]))
+                {
+                        $primary	= $item->images[0];
+                        foreach($item->images as $photo)
+                        {
+                                if(isset($photo->primary))
+                                {
+                                        $primary	= $photo;
+                                }
+                        }
+
+                        $photo	= '<img src="'.base_url('uploads/images/small/'.$primary->filename).'" alt="'.$item->seo_title.'"/>';
+                }
+						 
+                $addOns = $index>0?$hide= 'style="display: none;"':'';
+                echo '<div class="room_selector" data-price="34" data-adults="1" data-kids="1" '.$addOns.'>
+                        <h5><a href="#" class="pull-left"><i class="icon-chevron-left"></i></a>'.$item->name.'<a href="#" class="pull-right "><i class="icon-chevron-right"></i></a></h5>
+                        <a href="listings.html">'.$photo.'</a>
+                        <p>All single rooms have one single bed and sleeps one adult. A 25-inch TV is included.</p>
+                    </div>';
+                $index++;
+            endforeach;
+        ?>
         </div>		
         <div class="span3 home_calendar">
             <div class="form-horizontal">			

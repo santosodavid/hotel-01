@@ -18,6 +18,12 @@ class Cart extends Front_Controller {
 		$data['gift_cards_enabled']             = $this->gift_cards_enabled;
 		$data['banners']			= $this->Banner_model->get_homepage_banners(5);
 		$data['boxes']				= $this->box_model->get_homepage_boxes(4);
+		$data['rooms']				= $this->Product_model->get_all_products();
+                foreach ($data['rooms'] as &$p)
+		{
+			$p->images	= (array)json_decode($p->images);
+		}
+                
 		$data['homepage']			= true;
                 $data['active']			= "Home";
 		
