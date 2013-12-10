@@ -8,6 +8,7 @@ class Cart extends Front_Controller {
 		
 		//make sure we're not always behind ssl
 		remove_ssl();
+                
 	}
 
 	function index()
@@ -15,21 +16,33 @@ class Cart extends Front_Controller {
 		$this->load->model(array('Banner_model', 'box_model'));
 		$this->load->helper('directory');
 
-		$data['gift_cards_enabled']             = $this->gift_cards_enabled;
+		$data['gift_cards_enabled'] = $this->gift_cards_enabled;
 		$data['banners']			= $this->Banner_model->get_homepage_banners(5);
 		$data['boxes']				= $this->box_model->get_homepage_boxes(4);
 		$data['rooms']				= $this->Product_model->get_all_products();
-                foreach ($data['rooms'] as &$p)
+                
+		foreach ($data['rooms'] as &$p)
 		{
-			$p->images	= (array)json_decode($p->images);
+			$p->images = (array)json_decode($p->images);
+			$p->price  =  $this->isWeekend() ? $p->saleprice : $p->price;
 		}
                 
-		$data['homepage']			= true;
-                $data['active']			= "Home";
+		$data['homepage']		= true;
+		$data['active']			= "Home";
 		
 		$this->load->view('homepage', $data);
 	}
 
+	function isWeekend() {
+		$date =  date('Y-m-d H:i:s');
+		$weekDay = date('w', strtotime($date));
+		return ($weekDay == 0 || $weekDay == 6);
+	}
+
+	function map(){
+		echo "sss";
+	}
+	
 	function page($id = false)
 	{
 		//if there is no page id provided redirect to the homepage.

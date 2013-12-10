@@ -64,7 +64,7 @@
             foreach ($rooms as $item):
                 $photo	= theme_img('no_picture.png', lang('no_image_available'));
                 $item->images	= array_values($item->images);
-            
+                
                 if(!empty($item->images[0]))
                 {
                         $primary	= $item->images[0];
@@ -80,7 +80,7 @@
                 }
 						 
                 $addOns = $index>0?$hide= 'style="display: none;"':'';
-                echo '<div class="room_selector" data-price="34" data-adults="1" data-kids="1" '.$addOns.'>
+                echo '<div class="room_selector" data-price="'.$item->price.'" data-adults="1" data-kids="1" '.$addOns.'>
                         <h5><a href="#" class="pull-left"><i class="icon-chevron-left"></i></a>'.$item->name.'<a href="#" class="pull-right "><i class="icon-chevron-right"></i></a></h5>
                         <a href="listings.html">'.$photo.'</a>
                         <p>All single rooms have one single bed and sleeps one adult. A 25-inch TV is included.</p>
@@ -158,7 +158,7 @@
 
 
             </div>
-            <div id="total_price" class="price">128.00 GBP</div>
+            <div id="total_price" class="price"></div>
             <a class="btn btn-primary btn-large book-now" href="book.html">Book now!</a>
         </div>		
     </div>	
