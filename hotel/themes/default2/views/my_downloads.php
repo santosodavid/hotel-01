@@ -3,31 +3,33 @@
 <?php
 $counter	= 0;
 if(!empty($downloads)) : ?>
-	<?php foreach($downloads as $key=>$val) : ?>
-	<h2><?php echo lang('order_number').': '.$key ?></h2>
-	<table class="table table-bordered table-striped">
-		<thead>
-			<tr>
-				<th><?php echo lang('filename');?></th>
-				<th><?php echo lang('title');?></th>
-				<th><?php echo lang('size');?></th>
-				<th><?php echo lang('download_limit') ?></th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
+<?php foreach($downloads as $key=>$val) : ?>
+<h2>
+	<?php echo lang('order_number').': '.$key ?>
+</h2>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th><?php echo lang('filename');?></th>
+			<th><?php echo lang('title');?></th>
+			<th><?php echo lang('size');?></th>
+			<th><?php echo lang('download_limit') ?></th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
 		<?php foreach($val as $file): ?>
-		
-			<tr>
-				<td><?php echo $file->filename; ?></td>
-				<td><?php echo $file->title; ?></td>
-				<td><?php echo $file->size; ?></td>
-				<?php 
-						$max_exc = false;
-						if($file->max_downloads==0) 
-						{
-							echo '<td width="10%">'.lang('no_max').'</td>';
-						} else if($file->max_downloads <= $file->downloads) {
+
+		<tr>
+			<td><?php echo $file->filename; ?></td>
+			<td><?php echo $file->title; ?></td>
+			<td><?php echo $file->size; ?></td>
+			<?php 
+			$max_exc = false;
+			if($file->max_downloads==0)
+			{
+				echo '<td width="10%">'.lang('no_max').'</td>';
+			} else if($file->max_downloads <= $file->downloads) {
 							$max_exc = true;
 							echo '<td colspan="2">'.lang('max_exceeded').'</td>';
 						} else {
@@ -37,22 +39,24 @@ if(!empty($downloads)) : ?>
 							echo $file->max_downloads - $file->downloads;
 							echo '</td>';
 						}
-				?>
-				<?php  if(!$max_exc) : ?>
-				<td id="download_button_<?php echo $counter;?>">
-					<a class="btn" onclick="count_down(<?php echo $counter;?>);" href="<?php echo site_url('secure/download/'.$file->link) ?>"><?php echo lang('download_btn') ?></a>
-				</td>
-				<?php endif; ?>
-			</tr>
+						?>
+			<?php  if(!$max_exc) : ?>
+			<td id="download_button_<?php echo $counter;?>"><a class="btn"
+				onclick="count_down(<?php echo $counter;?>);"
+				href="<?php echo site_url('secure/download/'.$file->link) ?>"><?php echo lang('download_btn') ?>
+			</a>
+			</td>
+			<?php endif; ?>
+		</tr>
 		<?php $counter++;
 		 endforeach; // end foreach val ?>
-		</tbody>
-	</table>
-	<?php endforeach; // end foreach downloads ?>
+	</tbody>
+</table>
+<?php endforeach; // end foreach downloads ?>
 <?php else: ?>
-	<div class="alert">
-	  <?php echo lang('no_downloads');?>
-	</div>
+<div class="alert">
+	<?php echo lang('no_downloads');?>
+</div>
 <?php endif;?>
 
 <script type="text/javascript">

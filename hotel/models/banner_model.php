@@ -9,7 +9,7 @@ Class Banner_model extends CI_Model
 		}
 		return $this->db->order_by('sequence ASC')->get('banners')->result();
 	}
-	
+
 	function get_homepage_banners($limit = false)
 	{
 		$banners	= $this->db->order_by('sequence ASC')->get('banners')->result();
@@ -50,53 +50,53 @@ Class Banner_model extends CI_Model
 			{
 				$count++;
 			}
-			
+				
 			if($limit)
 			{
 				if($count > $limit)
 				{
 					continue;
-				}				
+				}
 			}
 		}
 		return $banners;
 	}
-	
+
 	function get_banner($id)
 	{
 		$this->db->where('id', $id);
 		$result = $this->db->get('banners');
 		$result = $result->row();
-		
+
 		if ($result)
 		{
 			if ($result->enable_on == '0000-00-00')
 			{
 				$result->enable_on = '';
 			}
-			
+				
 			if ($result->disable_on == '0000-00-00')
 			{
 				$result->disable_on = '';
 			}
-		
+
 			return $result;
 		}
 		else
-		{ 
+		{
 			return array();
 		}
 	}
-	
+
 	function delete($id)
 	{
-		
+
 		$banner	= $this->get_banner($id);
 		if ($banner)
 		{
 			$this->db->where('id', $id);
 			$this->db->delete('banners');
-			
+				
 			return 'The "'.$banner->title.'" banner has been removed.';
 		}
 		else
@@ -104,7 +104,7 @@ Class Banner_model extends CI_Model
 			return 'The banner could not be found.';
 		}
 	}
-	
+
 	function get_next_sequence()
 	{
 		$this->db->select('sequence');
@@ -121,7 +121,7 @@ Class Banner_model extends CI_Model
 			return 0;
 		}
 	}
-	
+
 	function save_banner($data)
 	{
 		if(isset($data['id']))
@@ -135,7 +135,7 @@ Class Banner_model extends CI_Model
 			$this->db->insert('banners', $data);
 		}
 	}
-	
+
 	function organize($banners)
 	{
 		foreach ($banners as $sequence => $id)

@@ -1,7 +1,7 @@
 <?php
 
 class Shipping extends Admin_Controller {
-	
+
 	function __construct()
 	{
 		parent::__construct();
@@ -11,24 +11,24 @@ class Shipping extends Admin_Controller {
 		$this->load->model('Settings_model');
 		$this->lang->load('settings');
 	}
-	
+
 	function index()
 	{
 		redirect($this->config->item('admin_folder').'/settings');
 	}
-	
+
 	function install($module)
 	{
 		//setup the third_party package
 		$this->load->add_package_path(APPPATH.'packages/shipping/'.$module.'/');
 		$this->load->library($module);
-		
+
 		$enabled_modules	= $this->Settings_model->get_settings('shipping_modules');
-		
+
 		if(!array_key_exists($module, $enabled_modules))
 		{
 			$this->Settings_model->save_settings('shipping_modules', array($module=>false));
-			
+				
 			//run install script
 			$this->$module->install();
 		}
@@ -39,22 +39,22 @@ class Shipping extends Admin_Controller {
 		}
 		redirect($this->config->item('admin_folder').'/shipping');
 	}
-	
+
 	//this is an alias of install
 	function uninstall($module)
 	{
 		$this->install($module);
 	}
-	
+
 	function settings($module)
 	{
 		$this->load->helper('form');
 		$this->load->add_package_path(APPPATH.'packages/shipping/'.$module.'/');
 		$this->load->library($module);
-		
+
 		//ok, in order for the most flexibility, and in case someone wants to use javascript or something
 		//the form gets pulled directly from the library.
-	
+
 		if(count($_POST) >0)
 		{
 			$check	= $this->$module->check();

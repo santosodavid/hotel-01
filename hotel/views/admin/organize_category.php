@@ -54,14 +54,14 @@ function save_sortable()
 		</tr>
 	</thead>
 	<tbody id="category_contents">
-<?php foreach ($category_products as $product):?>
+		<?php foreach ($category_products as $product):?>
 		<tr id="product-<?php echo $product->id;?>">
 			<td><?php echo $product->sku;?></td>
 			<td><?php echo $product->name;?></td>
 			<td><?php echo format_currency($product->price);?></td>
 			<td><?php echo format_currency($product->saleprice);?></td>
 		</tr>
-<?php endforeach; ?>
+		<?php endforeach; ?>
 	</tbody>
 </table>
 

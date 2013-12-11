@@ -2,83 +2,83 @@
 
 Class Digital_Products extends Admin_Controller {
 
-    function __construct() {
-        parent::__construct();
-        $this->lang->load('digital_product');
-        $this->load->model('digital_product_model');
-    }
+	function __construct() {
+		parent::__construct();
+		$this->lang->load('digital_product');
+		$this->load->model('digital_product_model');
+	}
 
-    function index() {
-        $data['page_title'] = lang('dgtl_pr_header');
-        $data['file_list'] = $this->digital_product_model->get_list();
+	function index() {
+		$data['page_title'] = lang('dgtl_pr_header');
+		$data['file_list'] = $this->digital_product_model->get_list();
 
-        $this->load->view($this->config->item('admin_folder') . '/digital_products', $data);
-    }
+		$this->load->view($this->config->item('admin_folder') . '/digital_products', $data);
+	}
 
-    function form($id = 0) {
-        $this->load->helper('form_helper');
-        $this->load->library('form_validation');
-        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+	function form($id = 0) {
+		$this->load->helper('form_helper');
+		$this->load->library('form_validation');
+		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 
-        $data = array('id' => ''
-            , 'filename' => ''
-            , 'max_downloads' => ''
-            , 'title' => ''
-            , 'size' => ''
-        );
-        if ($id) {
-            $data = array_merge($data, (array) $this->digital_product_model->get_file_info($id));
-        }
+		$data = array('id' => ''
+				, 'filename' => ''
+				, 'max_downloads' => ''
+				, 'title' => ''
+				, 'size' => ''
+		);
+		if ($id) {
+			$data = array_merge($data, (array) $this->digital_product_model->get_file_info($id));
+		}
 
-        $data['page_title'] = lang('digital_products_form');
+		$data['page_title'] = lang('digital_products_form');
 
-        $this->form_validation->set_rules('max_downloads', 'lang:max_downloads', 'numeric');
-        $this->form_validation->set_rules('title', 'lang:title', 'trim|required');
-
-
-        if ($this->form_validation->run() == FALSE) {
-            $this->load->view($this->config->item('admin_folder') . '/digital_product_form', $data);
-        } else {
+		$this->form_validation->set_rules('max_downloads', 'lang:max_downloads', 'numeric');
+		$this->form_validation->set_rules('title', 'lang:title', 'trim|required');
 
 
-            if ($id == 0) {
-                $data['file_name'] = false;
-                $data['error'] = false;
+		if ($this->form_validation->run() == FALSE) {
+			$this->load->view($this->config->item('admin_folder') . '/digital_product_form', $data);
+		} else {
 
-                $config['allowed_types'] = '*';
-                $config['upload_path'] = 'uploads/digital_uploads'; //$this->config->item('digital_products_path');
-                $config['remove_spaces'] = true;
 
-                $this->load->library('upload', $config);
+			if ($id == 0) {
+				$data['file_name'] = false;
+				$data['error'] = false;
 
-                if ($this->upload->do_upload()) {
-                    $upload_data = $this->upload->data();
-                } else {
-                    $data['error'] = $this->upload->display_errors();
-                    $this->load->view($this->config->item('admin_folder') . '/digital_product_form', $data);
-                    return;
-                }
+				$config['allowed_types'] = '*';
+				$config['upload_path'] = 'uploads/digital_uploads'; //$this->config->item('digital_products_path');
+				$config['remove_spaces'] = true;
 
-                $save['filename'] = $upload_data['file_name'];
-                $save['size'] = $upload_data['file_size'];
-            } else {
-                $save['id'] = $id;
-            }
+				$this->load->library('upload', $config);
 
-            $save['max_downloads'] = set_value('max_downloads');
-            $save['title'] = set_value('title');
+				if ($this->upload->do_upload()) {
+					$upload_data = $this->upload->data();
+				} else {
+					$data['error'] = $this->upload->display_errors();
+					$this->load->view($this->config->item('admin_folder') . '/digital_product_form', $data);
+					return;
+				}
 
-            $this->digital_product_model->save($save);
+				$save['filename'] = $upload_data['file_name'];
+				$save['size'] = $upload_data['file_size'];
+			} else {
+				$save['id'] = $id;
+			}
 
-            redirect($this->config->item('admin_folder') . '/digital_products');
-        }
-    }
+			$save['max_downloads'] = set_value('max_downloads');
+			$save['title'] = set_value('title');
 
-    function delete($id) {
-        $this->digital_product_model->delete($id);
+			$this->digital_product_model->save($save);
 
-        $this->session->set_flashdata('message', lang('message_deleted_file'));
-        redirect($this->config->item('admin_folder') . '/digital_products');
-    }
+			redirect($this->config->item('admin_folder') . '/digital_products');
+		}
+	}
+
+	function delete($id) {
+		$this->digital_product_model->delete($id);
+
+		$this->session->set_flashdata('message', lang('message_deleted_file'));
+		redirect($this->config->item('admin_folder') . '/digital_products');
+	}
 
 }

@@ -311,12 +311,12 @@ function update_total_price() {
 	// first we update the select boxes
 	var max_adults = parseInt(room.data('adults'));
 	var max_kids = parseInt(room.data('kids'));
-	var adults_options 	= [0];
-	var kids_options 	= [0];
+	var adults_options = [ 0 ];
+	var kids_options = [ 0 ];
 	for ( var i = 1; i <= max_adults; i++) {
 		adults_options.push(i);
 	}
-	
+
 	for ( var i = 1; i <= max_kids; i++) {
 		kids_options.push(i);
 	}
@@ -333,12 +333,35 @@ function update_total_price() {
 		$subType.append($('<option></option>').attr("value", this).text(this));
 	});
 
-	var price = parseInt(room.data('price'));
-	var total_price = price;
+	// var price = parseInt(room.data('price'));
+	// var total_price = price;
 
 	var days = returnNumberOfDaysBetweenTwoDates($('.datepicker_from')
 			.datepicker("getDate"), $('.datepicker_to').datepicker("getDate"));
-	total_price = total_price * days * parseInt($('.select_rooms').val());
+
+	var total_price = 0;
+	// console.log(days);
+	// console.log("start");
+	for ( var i = 1; i <= days; i++) {
+		var from = $('.datepicker_from').datepicker("getDate");
+		var tempDate = from.setDate(from.getDate() + i);
+		var price;
+		// console.log("i is : " + i);
+		// console.log("date is : " + new Date(tempDate)
+		// + dateIsWeekend(new Date(tempDate)));
+
+		price = parseInt(room.data('price'));
+		if (dateIsWeekend(new Date(tempDate))) {
+			price = parseInt(room.data('saleprice'));
+		}
+
+		total_price += parseInt(price);
+	}
+
+	// console.log("end");
+
+	// total_price = total_price * days * parseInt($('.select_rooms').val());
+	total_price = total_price * parseInt($('.select_rooms').val());
 
 	$('#total_price').html("Rp " + String.format("{0:c}", total_price));
 	$('#total_price').css('letterSpacing', '0px');
@@ -353,6 +376,14 @@ function update_total_price() {
 	}
 
 }
+
+function dateIsWeekend(date) {
+	if ((date.getDay() == 6) || (date.getDay() == 0)) {
+		return true;
+	}
+	return false;
+}
+
 function returnNumberOfDaysBetweenTwoDates(date1, date2) {
 	var minutes = 1000 * 60;
 	var hours = minutes * 60;
@@ -362,19 +393,17 @@ function returnNumberOfDaysBetweenTwoDates(date1, date2) {
 
 	return Math.round(diff / days);
 }
-var dates = {
-	'2012/11/22' : 'some description',
-	'2012/11/30' : 'some other description'
-};
-var tips = [ 'some description', 'some other description' ];
-function highlightDays(date) {
-	var search = date.getFullYear() + "/" + (date.getMonth() + 1) + "/"
-			+ (date.getDate());
-	if (dates[search]) {
-		return [ true, 'highlight', dates[search] || '' ];
-	}
-	return [ false, '', '' ];
-}
+
+/*
+ * var dates = { '2012/11/22' : 'some description', '2012/11/30' : 'some other
+ * description' };
+ * 
+ * var tips = [ 'some description', 'some other description' ];
+ * 
+ * function highlightDays(date) { var search = date.getFullYear() + "/" +
+ * (date.getMonth() + 1) + "/" + (date.getDate()); if (dates[search]) { return [
+ * true, 'highlight', dates[search] || '' ]; } return [ false, '', '' ]; }
+ */
 
 /*******************************************************************************
  * 

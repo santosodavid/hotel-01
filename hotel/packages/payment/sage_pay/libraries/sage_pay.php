@@ -1,24 +1,24 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
-* GoCart Sage Pay Class
-*
-* This class is part of the sage pay payment module.
-* 
-*
-* @package       GoCart Sage Pay payment module
-* @subpackage    
-* @category      Packages/Payment
-* @author        swicks@devicesoftware.com
-* @version       0.2
-* @todo          integrate backend to manage payments directly through GoCart, support form, server & 3D secure, 
+ * GoCart Sage Pay Class
+ *
+ * This class is part of the sage pay payment module.
+ *
+ *
+ * @package       GoCart Sage Pay payment module
+ * @subpackage
+ * @category      Packages/Payment
+ * @author        swicks@devicesoftware.com
+ * @version       0.2
+ * @todo          integrate backend to manage payments directly through GoCart, support form, server & 3D secure,
 */
 
 
 //Sage pay currently supported credit/debit cards
 define('SAGE_PAY_CARD_TYPES', 'MC,MasterCard,VISA,VISA Credit,DELTA,VISA Debit,UKE,VISA Electron,MAESTRO,Maestro (Switch),AMEX,American Express,DC,Diner\'s Club,JCB,JCB Card,LASER,Laser');
 
-//list of currencies this can easily be modified by adding/removing items    
+//list of currencies this can easily be modified by adding/removing items
 define('SAGE_PAY_CURRENCY', 'USD,US Dollar (USD),EURO,Euro,GBP,GB Pound (GBP)');
 
 class Sage_pay
@@ -36,9 +36,9 @@ class Sage_pay
 
 
 	/**
-	* constructor
-	* 
-*/
+	 * constructor
+	 *
+	 */
 	function __construct(){
 		$this->CI =& get_instance();
 		$this->CI->load->library('sage_pay_lib');
@@ -48,11 +48,11 @@ class Sage_pay
 	}
 
 	/**
-	* customer front end checkout form
-	* 
-	* @param array $post
-	* @return string
-*/
+	 * customer front end checkout form
+	 *
+	 * @param array $post
+	 * @return string
+	 */
 	public function checkout_form($post = false){
 		//load form helper
 		$this->CI->load->helper('form');
@@ -67,7 +67,7 @@ class Sage_pay
 			//store values in keys
 			foreach($selected_cards as $selected_card){
 				$settings['card_types'][$selected_card] = 1;
-			}                
+			}
 		}
 
 		$form = array();
@@ -84,70 +84,70 @@ class Sage_pay
 
 			return $form;
 
-			} else return array();
+		} else return array();
 
-			return $form;
+		return $form;
+	}
+
+	public function checkout_check(){
+
+		//load credit card helper
+		$this->CI->load->helper('credit_card_helper');
+
+		$error_msg = lang('fix_errors')."<br/><ul>";
+		$error_list = "";
+
+		//Verify name field
+		if( empty($_POST["CardHolder"]))
+			$error_list .= "<li>".lang('enter_name')."</li>";
+
+		//Verify date
+		if( !card_expiry_valid($_POST["ExpiryDate_mm"], $_POST["ExpiryDate_yy"]) )
+			$error_list .= "<li>".lang('fix_exp_date')."</li>";
+
+		//Verify card number
+		if( empty($_POST["CardNumber"]) || !card_number_valid($_POST["CardNumber"]) )
+			$error_list .= "<li>".lang('fix_card_num')."</li>";
+
+		//Verify security code
+		if( empty($_POST["CV2"]))
+		{
+			$error_list .= "<li>".lang('enter_cvv')."</li>";
 		}
 
-		public function checkout_check(){
+		// We need to store the credit card information temporarily
+		$sp_tmp_data["sp_data"] = $_POST;
+		$this->CI->session->set_userdata($sp_tmp_data);
 
-			//load credit card helper
-			$this->CI->load->helper('credit_card_helper');
-
-			$error_msg = lang('fix_errors')."<br/><ul>";
-			$error_list = "";
-
-			//Verify name field
-			if( empty($_POST["CardHolder"])) 
-				$error_list .= "<li>".lang('enter_name')."</li>";
-
-			//Verify date
-			if( !card_expiry_valid($_POST["ExpiryDate_mm"], $_POST["ExpiryDate_yy"]) )
-				$error_list .= "<li>".lang('fix_exp_date')."</li>";
-
-			//Verify card number
-			if( empty($_POST["CardNumber"]) || !card_number_valid($_POST["CardNumber"]) )
-				$error_list .= "<li>".lang('fix_card_num')."</li>";
-
-			//Verify security code
-			if( empty($_POST["CV2"]))
-			{
-				$error_list .= "<li>".lang('enter_cvv')."</li>";
-			}
-
-			// We need to store the credit card information temporarily
-			$sp_tmp_data["sp_data"] = $_POST;
-			$this->CI->session->set_userdata($sp_tmp_data);
-
-			if( $error_list ) 
-				return $error_msg . $error_list . "</ul>";
-			else 
-			{
-				return false;
-			}
+		if( $error_list )
+			return $error_msg . $error_list . "</ul>";
+		else
+		{
+			return false;
 		}
+	}
 
 	/**
-	* payment module description
-	* 
-*/
+	 * payment module description
+	 *
+	 */
 	public function description(){
 		//create a description from the session which we can store in the database
 		//this will be added to the database upon order confirmation
 
-/*
-	access the payment information with the  $_POST variable since this is called
-	from the same place as the checkout_check above.
-*/
+		/*
+		 access the payment information with the  $_POST variable since this is called
+		from the same place as the checkout_check above.
+		*/
 
-	return 'Sage Pay';
+		return 'Sage Pay';
 
 	}
 
 	/**
-	* back end installation functions
-	* 
-*/
+	 * back end installation functions
+	 *
+	 */
 	public function install(){
 		//default settings
 		$config['service'] = 'DIRECT'; //FORM, SERVER & DIRECT - direct only available in this version
@@ -181,11 +181,11 @@ class Sage_pay
 	}
 
 	/**
-	* table for storing transaction data
-	* 
-	* @param string $prefix
-	* @return array
-*/
+	 * table for storing transaction data
+	 *
+	 * @param string $prefix
+	 * @return array
+	 */
 	private function create_table($prefix){
 		$query = array();
 
@@ -194,50 +194,50 @@ class Sage_pay
 
 		// currently set not to overwrite if install has already been run
 		$query[] = "CREATE TABLE IF NOT EXISTS `".$prefix."sage_pay` (
-			`id` int(11) NOT NULL AUTO_INCREMENT,
-			`order_id` int(11) DEFAULT NULL,
-			`VPSProtocol` varchar(4) COLLATE utf8_general_ci DEFAULT NULL,
-			`Status` varchar(15) COLLATE utf8_general_ci DEFAULT NULL,
-			`StatusDetail` varchar(255) COLLATE utf8_general_ci DEFAULT NULL,
-			`VendorTxCode` varchar(64) COLLATE utf8_general_ci DEFAULT NULL,
-			`VPSTxId` varchar(38) COLLATE utf8_general_ci DEFAULT NULL,
-			`SecurityKey` varchar(10) COLLATE utf8_general_ci DEFAULT NULL,
-			`TxAuthNo` int(11) DEFAULT NULL,
-			`AVSCV2` varchar(50) COLLATE utf8_general_ci DEFAULT NULL,
-			`AddressResult` varchar(20) COLLATE utf8_general_ci DEFAULT NULL,
-			`PostCodeResult` varchar(20) COLLATE utf8_general_ci DEFAULT NULL,
-			`CV2Result` varchar(20) COLLATE utf8_general_ci DEFAULT NULL,
-			`3DSecureStatus` varchar(20) COLLATE utf8_general_ci DEFAULT NULL,
-			`CAVV` varchar(32) COLLATE utf8_general_ci DEFAULT NULL,
-			`MD` varchar(35) COLLATE utf8_general_ci DEFAULT NULL,
-			`ACSURL` text COLLATE utf8_general_ci,
-			`PAReq` text COLLATE utf8_general_ci,
-			`PayPalRedirectURL` varchar(255) COLLATE utf8_general_ci DEFAULT NULL,
-			`Created` datetime default NULL,
-			PRIMARY KEY (`id`)
-			) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;";
+				`id` int(11) NOT NULL AUTO_INCREMENT,
+				`order_id` int(11) DEFAULT NULL,
+				`VPSProtocol` varchar(4) COLLATE utf8_general_ci DEFAULT NULL,
+				`Status` varchar(15) COLLATE utf8_general_ci DEFAULT NULL,
+				`StatusDetail` varchar(255) COLLATE utf8_general_ci DEFAULT NULL,
+				`VendorTxCode` varchar(64) COLLATE utf8_general_ci DEFAULT NULL,
+				`VPSTxId` varchar(38) COLLATE utf8_general_ci DEFAULT NULL,
+				`SecurityKey` varchar(10) COLLATE utf8_general_ci DEFAULT NULL,
+				`TxAuthNo` int(11) DEFAULT NULL,
+				`AVSCV2` varchar(50) COLLATE utf8_general_ci DEFAULT NULL,
+				`AddressResult` varchar(20) COLLATE utf8_general_ci DEFAULT NULL,
+				`PostCodeResult` varchar(20) COLLATE utf8_general_ci DEFAULT NULL,
+				`CV2Result` varchar(20) COLLATE utf8_general_ci DEFAULT NULL,
+				`3DSecureStatus` varchar(20) COLLATE utf8_general_ci DEFAULT NULL,
+				`CAVV` varchar(32) COLLATE utf8_general_ci DEFAULT NULL,
+				`MD` varchar(35) COLLATE utf8_general_ci DEFAULT NULL,
+				`ACSURL` text COLLATE utf8_general_ci,
+				`PAReq` text COLLATE utf8_general_ci,
+				`PayPalRedirectURL` varchar(255) COLLATE utf8_general_ci DEFAULT NULL,
+				`Created` datetime default NULL,
+				PRIMARY KEY (`id`)
+				) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;";
 
 		return $query;
 	}
 	/**
-	* remove payment module settings
-	* 
-	*/
+	 * remove payment module settings
+	 *
+	 */
 	public function uninstall(){
 		$this->CI->Settings_model->delete_settings('sage_pay');
 		$queries = $this->drop_table($this->CI->db->dbprefix);
 		foreach($queries as $query){
 			$this->CI->db->query($query);
-		}        
+		}
 	}
 	/**
-	* drop any associated tables
-	* 
-	* @param string $prefix
-	* @return array
-	*/
+	 * drop any associated tables
+	 *
+	 * @param string $prefix
+	 * @return array
+	 */
 	private function drop_table($prefix){
-		$query = array();       
+		$query = array();
 
 		$query[] = "DROP TABLE IF EXISTS `".$prefix."sage_pay`;";
 
@@ -246,18 +246,18 @@ class Sage_pay
 
 
 	/**
-	* payment processor
-	* 
-	*/
+	 * payment processor
+	 *
+	 */
 	public function process_payment(){
 
 		// Get previously entered customer info
 		$sp_data = $this->CI->session->userdata('sp_data');
 		$customer = $this->CI->go_cart->customer();
 
-		// Set our sagepay fields       
+		// Set our sagepay fields
 
-		$this->CI->sage_pay_lib->add_field('Amount', $this->CI->go_cart->total());        
+		$this->CI->sage_pay_lib->add_field('Amount', $this->CI->go_cart->total());
 
 		$this->CI->sage_pay_lib->add_field('CardHolder', $sp_data["CardHolder"]);
 		$this->CI->sage_pay_lib->add_field('CardNumber', $sp_data["CardNumber"]);
@@ -267,7 +267,7 @@ class Sage_pay
 		$this->CI->sage_pay_lib->add_field('CardType', $sp_data["CardType"]);
 
 		$this->CI->sage_pay_lib->add_field('BillingSurname', $customer['bill_address']["lastname"]);
-		$this->CI->sage_pay_lib->add_field('BillingFirstnames', $customer['bill_address']["firstname"]);        
+		$this->CI->sage_pay_lib->add_field('BillingFirstnames', $customer['bill_address']["firstname"]);
 		$this->CI->sage_pay_lib->add_field('BillingAddress1', $customer['bill_address']["address1"]);
 		$this->CI->sage_pay_lib->add_field('BillingAddress2',$customer['bill_address']["address2"]);
 		$this->CI->sage_pay_lib->add_field('BillingCity', $customer['bill_address']["city"]);
@@ -280,13 +280,13 @@ class Sage_pay
 		{
 			$this->CI->sage_pay_lib->add_field('BillingState', "");
 		}
-		
+
 		$this->CI->sage_pay_lib->add_field('BillingPostCode', $customer['bill_address']["zip"]);
 		$this->CI->sage_pay_lib->add_field('BillingCountry', $customer['bill_address']["country_code"]);
-		$this->CI->sage_pay_lib->add_field('BillingPhone', $customer['bill_address']["phone"]);        
+		$this->CI->sage_pay_lib->add_field('BillingPhone', $customer['bill_address']["phone"]);
 
 		$this->CI->sage_pay_lib->add_field('DeliverySurname', $customer['ship_address']["lastname"]);
-		$this->CI->sage_pay_lib->add_field('DeliveryFirstnames', $customer['ship_address']["firstname"]);        
+		$this->CI->sage_pay_lib->add_field('DeliveryFirstnames', $customer['ship_address']["firstname"]);
 		$this->CI->sage_pay_lib->add_field('DeliveryAddress1', $customer['ship_address']["address1"]);
 		$this->CI->sage_pay_lib->add_field('DeliveryAddress2',$customer['ship_address']["address2"]);
 		$this->CI->sage_pay_lib->add_field('DeliveryCity', $customer['ship_address']["city"]);
@@ -302,7 +302,7 @@ class Sage_pay
 
 		$this->CI->sage_pay_lib->add_field('DeliveryPostCode', $customer['ship_address']["zip"]);
 		$this->CI->sage_pay_lib->add_field('DeliveryCountry', $customer['ship_address']["country_code"]);
-		$this->CI->sage_pay_lib->add_field('DeliveryPhone', $customer['ship_address']["phone"]);        
+		$this->CI->sage_pay_lib->add_field('DeliveryPhone', $customer['ship_address']["phone"]);
 
 
 		// Send info to sagepay and receive a response
@@ -313,9 +313,9 @@ class Sage_pay
 		switch($this->_sagepay_response['Status']){
 			case 'OK':
 			case 'REGISTERED':
-			$this->CI->session->unset_userdata('sp_data');
-			return false;   // false == no error
-			break;
+				$this->CI->session->unset_userdata('sp_data');
+				return false;   // false == no error
+				break;
 
 			case 'MALFORMED':
 			case 'INVALID':
@@ -323,18 +323,18 @@ class Sage_pay
 			case 'NOTAUTHED':
 			case 'REJECTED':
 			case '3DAUTH':
-			log_message('debug', 'Sage-pay module - Protocol:'. $this->_sagepay_response['VPSProtocol'] .' - Status:' . $this->_sagepay_response['Status']);
-			log_message('debug', 'Sage-pay module - Status Detail:'. $this->_sagepay_response['StatusDetail']);
-			return lang('transaction_declined');
-			break;
+				log_message('debug', 'Sage-pay module - Protocol:'. $this->_sagepay_response['VPSProtocol'] .' - Status:' . $this->_sagepay_response['Status']);
+				log_message('debug', 'Sage-pay module - Status Detail:'. $this->_sagepay_response['StatusDetail']);
+				return lang('transaction_declined');
+				break;
 		}
 	}
 	/**
-	* final method to run after the order has been saved.
-	* allows you to save order_id etc. back to the payment module
-	*
-	* @param array $data
-	*/
+	 * final method to run after the order has been saved.
+	 * allows you to save order_id etc. back to the payment module
+	 *
+	 * @param array $data
+	 */
 	public function complete_payment($data){
 
 		// add order id for admin to process payments
@@ -345,11 +345,11 @@ class Sage_pay
 	}
 
 	/**
-	* Admin form settings
-	* 
-	* @param array $post
-	* @return string
-	*/
+	 * Admin form settings
+	 *
+	 * @param array $post
+	 * @return string
+	 */
 	public function form($post	= false){
 
 		//load form helper
@@ -367,7 +367,7 @@ class Sage_pay
 				//store values in keys
 				foreach($selected_cards as $selected_card){
 					$settings['card_types'][$selected_card] = 1;
-				}                
+				}
 			}
 
 
@@ -382,10 +382,10 @@ class Sage_pay
 	}
 
 	/**
-	* Admin form validation
-	* 
-	*/
-	public function check(){	
+	 * Admin form validation
+	 *
+	 */
+	public function check(){
 		$error	= false;
 
 		// TODO 4 -o swicks -c Category: fix check options

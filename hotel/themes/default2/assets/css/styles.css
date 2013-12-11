@@ -1,37 +1,35 @@
 body {
-	margin-top:60px;
+	margin-top: 60px;
 }
 
-@media (max-width: 979px) {
+@media ( max-width : 979px) {
 	body {
-		margin-top:0px;
+		margin-top: 0px;
 	}
 }
 
-
-img.responsiveImage
-{
+img.responsiveImage {
 	width: 100%;
 }
 
 .price-slash {
-	text-decoration:line-through;
-	font-size:.9em;
-	color:#999;
+	text-decoration: line-through;
+	font-size: .9em;
+	color: #999;
 }
 
 .price-sale {
-	font-weight:bold;
-	color:#ff753f;
+	font-weight: bold;
+	color: #ff753f;
 }
 
 .price-reg {
-	font-weight:bold;
-	color:#38586f;
+	font-weight: bold;
+	color: #38586f;
 }
 
 .product-price {
-	color:#ffa800;
+	color: #ffa800;
 }
 
 /* Footer
@@ -41,72 +39,72 @@ img.responsiveImage
 	padding: 35px 0 36px;
 	border-top: 1px solid #e5e5e5;
 }
+
 .footer p {
 	margin-bottom: 0;
 	color: #555;
 }
 
 /* Hide Related products from the responsive design */
- @media (max-width: 767px) {
+@media ( max-width : 767px) {
 	.desktop {
-		display:none;
+		display: none;
 	}
 }
 
-@media (min-width: 767px) {
+@media ( min-width : 767px) {
 	.mobile {
-		display:none;
+		display: none;
 	}
-
 }
 
-.sku-pricing div{
-	color:#999;
-	text-transform:uppercase;
-	font-size:14px;
+.sku-pricing div {
+	color: #999;
+	text-transform: uppercase;
+	font-size: 14px;
 }
 
-.out-of-stock div{
-	background-color:#eee;
+.out-of-stock div {
+	background-color: #eee;
 	font-family: 'Oswald', sans-serif;
-	color:#858585;
-	text-transform:uppercase;
-	text-align:center;
-	padding:12px 15px;
-	font-size:22px;
-	margin:0px 0px 0px 45px;
+	color: #858585;
+	text-transform: uppercase;
+	text-align: center;
+	padding: 12px 15px;
+	font-size: 22px;
+	margin: 0px 0px 0px 45px;
 }
 
-.product-cart-form
-{
-	background-color:#eee;
-	border:1px solid #ddd;
+.product-cart-form {
+	background-color: #eee;
+	border: 1px solid #ddd;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
-	padding:20px 0px 10px;
+	padding: 20px 0px 10px;
 }
 
 /* My Account */
 .address-box {
-	border:1px solid #eee;
-	background-color:#f2f2f2;
-	padding:5px 20px;
-	margin:5px 0px;
+	border: 1px solid #eee;
+	background-color: #f2f2f2;
+	padding: 5px 20px;
+	margin: 5px 0px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
 }
+
 .my-account-box {
-	border:1px solid #eee;
-	background-color:#f2f2f2;
-	padding:5px 20px;
-	margin:10px -20px 5px;
+	border: 1px solid #eee;
+	background-color: #f2f2f2;
+	padding: 5px 20px;
+	margin: 10px -20px 5px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
 }
 
 .hide {
-	display:none;
+	display: none;
 }

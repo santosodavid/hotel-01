@@ -1,5 +1,6 @@
 <?php include('header.php'); ?>
-<div class="row-fluid slideshow-row">
+<div
+	class="row-fluid slideshow-row">
 	<div class="span12 slideshow">
 		<div class="slider-wrapper theme-default">
 			<div class="ribbon"></div>
@@ -33,7 +34,7 @@
 		<div id="calendar"></div>
 	</div>
 
-<!-- 	https://www.google.com/search?q=good+background+image+website&aq=f&oq=good+background+image+website&aqs=chrome.0.57j0l3.8265j0&sourceid=chrome&ie=UTF-8 -->
+	<!-- 	https://www.google.com/search?q=good+background+image+website&aq=f&oq=good+background+image+website&aqs=chrome.0.57j0l3.8265j0&sourceid=chrome&ie=UTF-8 -->
 	<style scoped>
 #background {
 	width: 254px;
@@ -88,10 +89,10 @@
 		}
 			
 		$addOns = $index > 0 ? $hide= 'style="display: none;"' : '';
-		echo '<div class="room_selector" data-price="'.$item->price.'" data-adults="'.$item->adults.'" data-kids="'.$item->kids.'" '.$addOns.'>
+		echo '<div class="room_selector" data-price="'.$item->price.'" data-saleprice="'.$item->saleprice.'" data-adults="'.$item->adults.'" data-kids="'.$item->kids.'" '.$addOns.'>
 				<h5><a href="#" class="pull-left"><i class="icon-chevron-left"></i></a>'.$item->name.'<a href="#" class="pull-right "><i class="icon-chevron-right"></i></a></h5>
 				<a href="listings.html">'.$photo.'</a>
-		<p>'.$item->description.'</p>
+			<p>'.$item->description.'</p>
 			</div>';
 		$index++;
 		endforeach;
@@ -163,7 +164,7 @@
 
 		</div>
 		<div id="total_price" class="price"></div>
-		<a class="btn btn-primary btn-large book-now" href="book.html">Book
+		<a class="btn btn-primary btn-large book-now" href="book">Book
 			now!</a>
 	</div>
 </div>

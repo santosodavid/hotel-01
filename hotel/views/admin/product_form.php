@@ -132,7 +132,7 @@ $GLOBALS['option_value_count'] = 0;
 					</div>
 				</div>
 
-				 
+
 				<div class="row">
 					<div class="span8">
 						<fieldset>
@@ -141,13 +141,13 @@ $GLOBALS['option_value_count'] = 0;
 							</legend>
 							<div class="row" style="padding-top: 10px;">
 								<div class="span8">
-									<label><?php echo lang('adults'); ?> </label>						
+									<label><?php echo lang('adults'); ?> </label>
 									<?php
-							        $adultsOptions = array('0' => 0, '1' => 1, '2' => 2, '3' => 3, '4' => 4);
-							        echo form_dropdown('adults', $adultsOptions, set_value('adults', $adults), 'class="span4"');
-							        ?>
-			        
-								</div> 
+									$adultsOptions = array('0' => 0, '1' => 1, '2' => 2, '3' => 3, '4' => 4);
+									echo form_dropdown('adults', $adultsOptions, set_value('adults', $adults), 'class="span4"');
+									?>
+
+								</div>
 								<div class="span8">
 									<label><?php echo lang('kids'); ?> </label>
 									<?php						
@@ -158,7 +158,7 @@ $GLOBALS['option_value_count'] = 0;
 							</div>
 						</fieldset>
 					</div>
-				</div> 
+				</div>
 
 				<div class="row">
 					<div class="span8">
@@ -403,29 +403,29 @@ $GLOBALS['option_value_count'] = 0;
 				});
 				</script>
 				<style type="text/css">
-					.option-form {
-						display: none;
-						margin-top: 10px;
-					}
-					
-					.option-values-form {
-						background-color: #fff;
-						padding: 6px 3px 6px 6px;
-						-webkit-border-radius: 3px;
-						-moz-border-radius: 3px;
-						border-radius: 3px;
-						margin-bottom: 5px;
-						border: 1px solid #ddd;
-					}
-					
-					.option-values-form input {
-						margin: 0px;
-					}
-					
-					.option-values-form a {
-						margin-top: 3px;
-					}
-				</style>
+.option-form {
+	display: none;
+	margin-top: 10px;
+}
+
+.option-values-form {
+	background-color: #fff;
+	padding: 6px 3px 6px 6px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	margin-bottom: 5px;
+	border: 1px solid #ddd;
+}
+
+.option-values-form input {
+	margin: 0px;
+}
+
+.option-values-form a {
+	margin-top: 3px;
+}
+</style>
 				<div class="row">
 					<div class="span8">
 						<table class="table table-striped" id="options_container">
@@ -440,7 +440,7 @@ $GLOBALS['option_value_count'] = 0;
 									if(empty($po->required)){
 									$po->required = false;
 									}
-									
+
 									add_option($po, $counter);
 									$counter++;
 								}

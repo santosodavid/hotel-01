@@ -6,7 +6,7 @@
  * @author martin maly
  * @copyright (C) 2008 martin maly
  */
-  /*   Modified for compatibility with GoCart by Clear Sky Designs */
+/*   Modified for compatibility with GoCart by Clear Sky Designs */
 /**
  * Class  HTTPRequest
  *
@@ -80,9 +80,9 @@ class HTTPRequest {
 			while ($chunk_length = hexdec(fgets($fp)))
 			{
 				$responseContentChunk = '';
-				 
+					
 				$read_length = 0;
-				 
+					
 				while ($read_length < $chunk_length)
 				{
 					$responseContentChunk .= fread($fp, $chunk_length - $read_length);
@@ -90,17 +90,17 @@ class HTTPRequest {
 				}
 
 				$responseContent.= $responseContentChunk;
-				 
+					
 				fgets($fp);
-				 
+					
 			}
-			 
+
 		}
 
 		$this->header = chop($responseHeader);
 		$this->content = $responseContent;
 		$this->parsedHeader = $this->headerParse();
-		
+
 		$code = intval(trim(substr($this->parsedHeader[0], 9)));
 
 		return $code;
@@ -125,8 +125,12 @@ class HTTPRequest {
 		return $out;
 	}
 
-	public function getContent() {return $this->content;}
-	public function getHeader() {return $this->parsedHeader;}
-	
+	public function getContent() {
+		return $this->content;
+	}
+	public function getHeader() {
+		return $this->parsedHeader;
+	}
+
 
 }

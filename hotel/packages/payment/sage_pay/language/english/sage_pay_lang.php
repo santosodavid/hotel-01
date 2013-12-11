@@ -1,17 +1,17 @@
 <?php
 
- /**
-     * GoCart Sage Pay Customer payment block
-     *
-     * This is the language for all sage pay content
-     * 
-     *
-     * @package       GoCart Sage Pay payment module
-     * @subpackage    
-     * @category      Packages/Payment
-     * @author        swicks@devicesoftware.com
-     * @version       0.2
-     */
+/**
+ * GoCart Sage Pay Customer payment block
+ *
+ * This is the language for all sage pay content
+ *
+ *
+ * @package       GoCart Sage Pay payment module
+ * @subpackage
+ * @category      Packages/Payment
+ * @author        swicks@devicesoftware.com
+ * @version       0.2
+ */
 
 // front end
 $lang['package_name'] 	= 'Credit Card Payments (Sage Pay)';
@@ -46,7 +46,7 @@ $lang['live']			= 'Live';
 $lang['payment'] 		= 'Payment';
 $lang['deferred']		= 'Deferred';
 $lang['authenticate']	= 'Authenticate';
-	
+
 $lang['enter_vendor']	= 'You must enter a valid Vendor Name';
 $lang['vps_protocol']	= 'VPS protocol';
 $lang['vendor_name']	= 'Vendor Name';

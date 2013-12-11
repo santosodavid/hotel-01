@@ -7,10 +7,10 @@ class Install extends CI_Controller {
 	 *
 	 * Maps to the following URL
 	 * 		http://example.com/index.php/welcome
-	 *	- or -  
+	 *	- or -
 	 * 		http://example.com/index.php/welcome/index
 	 *	- or -
-	 * Since this controller is set as the default controller in 
+	 * Since this controller is set as the default controller in
 	 * config/routes.php, it's displayed at http://example.com/
 	 *
 	 * So any other public methods not prefixed with an underscore will
@@ -20,42 +20,42 @@ class Install extends CI_Controller {
 	public function index()
 	{
 		/*
-		are we installing into a subfolder?
+		 are we installing into a subfolder?
 		if not, then the subfolder variabel below will be empty. If we are it will contain a value.
 		*/
 		$subfolder			= rtrim(dirname(dirname($_SERVER['PHP_SELF'])), '/\\').'/';
 		$data['subfolder']	= $subfolder;
-		
+
 		//make sure the config folder is writable
 		$data['config_writable']	= is_writable($_SERVER['DOCUMENT_ROOT'].$subfolder.'gocart/config/');
 		$data['root_writable']		= is_writable($_SERVER['DOCUMENT_ROOT'].$subfolder);
 		$data['relative_path']		= $subfolder.'gocart/config/';
-		
-		
+
+
 		$this->load->library('form_validation');
 		$this->load->helper(array('form', 'file'));
-		
+
 		$this->form_validation->set_rules('hostname', 'Hostname', 'required');
 		$this->form_validation->set_rules('database', 'Database Name', 'required');
 		$this->form_validation->set_rules('username', 'Username', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'trim');
 		$this->form_validation->set_rules('prefix', 'Database Prefix', 'trim');
-		
+
 		$this->form_validation->set_rules('admin_email', 'Admin Email', 'required|valid_email');
 		$this->form_validation->set_rules('admin_password', 'Admin Password', 'required|min_length[5]');
-		
+
 		$this->form_validation->set_rules('company_name', 'Company Name', 'required');
 		$this->form_validation->set_rules('website_email', 'Website Email', 'required|valid_email');
 		$this->form_validation->set_rules('ssl_support');
 		$this->form_validation->set_rules('mod_rewrite');
-		
+
 		$this->form_validation->set_rules('address1');
 		$this->form_validation->set_rules('address2');
 		$this->form_validation->set_rules('city');
 		$this->form_validation->set_rules('state');
 		$this->form_validation->set_rules('zip');
 		$this->form_validation->set_rules('country');
-		
+
 		if ($this->form_validation->run() == FALSE)
 		{
 			$data['errors']	= validation_errors();
@@ -76,18 +76,18 @@ class Install extends CI_Controller {
 			$config['cachedir'] = "";
 			$config['char_set'] = "utf8";
 			$config['dbcollat'] = "utf8_general_ci";
-			$config['active_r'] = TRUE; 
-			
+			$config['active_r'] = TRUE;
+				
 			// Unset any existing DB information
-			unset($this->db);		
+			unset($this->db);
 			$this->load->database($config);
-			
+				
 			if (is_resource($this->db->conn_id) OR is_object($this->db->conn_id))
-			{	
+			{
 
 				$queries	= $this->load->view('templates/sql', '', true);
 				$queries	= explode('-- new query', $queries);
-				
+
 				foreach($queries as $q)
 				{
 					$query	= str_replace('prefix_', $this->input->post('prefix'), $q);
@@ -103,7 +103,7 @@ class Install extends CI_Controller {
 				$settings['username']		= $this->input->post('username');
 				$settings['password']		= $this->input->post('password');
 				$settings['database']		= $this->input->post('database');
-				$settings['prefix']			= $this->input->post('prefix');				
+				$settings['prefix']			= $this->input->post('prefix');
 				$file_contents				= $this->load->view('templates/database', $settings, true);
 				write_file($_SERVER['DOCUMENT_ROOT'].$subfolder.'gocart/config/database.php', $file_contents);
 
@@ -129,7 +129,7 @@ class Install extends CI_Controller {
 				}
 				$file_contents				= $this->load->view('templates/config', $config_index, true);
 				write_file($_SERVER['DOCUMENT_ROOT'].$subfolder.'gocart/config/config.php', $file_contents);
-				
+
 				//setup the .htaccess file
 				if($this->input->post('mod_rewrite'))
 				{

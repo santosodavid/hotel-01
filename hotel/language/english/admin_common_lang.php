@@ -1,6 +1,6 @@
 <?php
 /******************************************
-US English
+ US English
 Admin Common Language
 ******************************************/
 
@@ -34,7 +34,7 @@ $lang['common_actions']				= 'Actions';
 
 //new
 $lang['common_reservations']			= 'Reservations';
-$lang['common_master']				= 'Master Data'; 
+$lang['common_master']				= 'Master Data';
 $lang['common_post']                            = 'Post';
 $lang['common_media']                            = 'Media';
 

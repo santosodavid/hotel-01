@@ -17,7 +17,9 @@ echo form_input($f_id);
 <div class="modal" id="my-modal">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">×</button>
-		<h3><?php echo lang('address_form');?></h3>
+		<h3>
+			<?php echo lang('address_form');?>
+		</h3>
 	</div>
 	<div class="modal-body">
 		<div class="alert allert-error hide" id="form-error">
@@ -25,33 +27,33 @@ echo form_input($f_id);
 		</div>
 		<div class="row-fluid">
 			<div class="span12">
-				<label><?php echo lang('address_company');?></label>
+				<label><?php echo lang('address_company');?> </label>
 				<?php echo form_input($f_company);?>
 			</div>
 		</div>
 		<div class="row-fluid">
 			<div class="span6">
-				<label><?php echo lang('address_firstname');?></label>
+				<label><?php echo lang('address_firstname');?> </label>
 				<?php echo form_input($f_first);?>
 			</div>
 			<div class="span6">
-				<label><?php echo lang('address_lastname');?></label>
+				<label><?php echo lang('address_lastname');?> </label>
 				<?php echo form_input($f_last);?>
 			</div>
 		</div>
 		<div class="row-fluid">
 			<div class="span6">
-				<label><?php echo lang('address_email');?></label>
+				<label><?php echo lang('address_email');?> </label>
 				<?php echo form_input($f_email);?>
 			</div>
 			<div class="span6">
-				<label><?php echo lang('address_phone');?></label>
+				<label><?php echo lang('address_phone');?> </label>
 				<?php echo form_input($f_phone);?>
 			</div>
 		</div>
 		<div class="row-fluid">
 			<div class="span12">
-				<label><?php echo lang('address');?></label>
+				<label><?php echo lang('address');?> </label>
 				<?php
 				echo form_input($f_address1);
 				echo form_input($f_address2);
@@ -60,28 +62,30 @@ echo form_input($f_id);
 		</div>
 		<div class="row-fluid">
 			<div class="span12">
-				<label><?php echo lang('address_country');?></label>
+				<label><?php echo lang('address_country');?> </label>
 				<?php echo form_dropdown('country_id', $countries_menu, set_value('country_id', $country_id), 'id="f_country_id" class="span12"');?>
 			</div>
 		</div>
 		<div class="row-fluid">
 			<div class="span4">
-				<label><?php echo lang('address_city');?></label>
+				<label><?php echo lang('address_city');?> </label>
 				<?php echo form_input($f_city);?>
 			</div>
 			<div class="span6">
-				<label><?php echo lang('address_state');?></label>
+				<label><?php echo lang('address_state');?> </label>
 				<?php echo form_dropdown('zone_id', $zones_menu, set_value('zone_id', $zone_id), 'id="f_zone_id" class="span12"');?>
 			</div>
 			<div class="span2">
-				<label><?php echo lang('address_postcode');?></label>
+				<label><?php echo lang('address_postcode');?> </label>
 				<?php echo form_input($f_zip);?>
 			</div>
 		</div>
 	</div>
 	<div class="modal-footer">
-		<a href="#" class="btn" data-dismiss="modal"><?php echo lang('close');?></a>
-		<a href="#" class="btn btn-primary" type="button" onclick="save_address(); return false;"><?php echo lang('form_submit');?></a>
+		<a href="#" class="btn" data-dismiss="modal"><?php echo lang('close');?>
+		</a> <a href="#" class="btn btn-primary" type="button"
+			onclick="save_address(); return false;"><?php echo lang('form_submit');?>
+		</a>
 	</div>
 </div>
 

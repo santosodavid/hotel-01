@@ -10,7 +10,7 @@ $config['company_name']                 = 'Hotel01';
 $config['address1']			= 'Jl. Engku Putri No. 01 Batam Center';
 $config['address2']			= '';
 $config['country']			= 'Indonesia'; // use proper country codes only
-$config['city']				= 'Batam'; 
+$config['city']				= 'Batam';
 $config['state']			= 'Kepulauan Riau';
 $config['zip']				= '29432';
 $config['email']			= 'admin@hotel-01.com';
@@ -31,7 +31,7 @@ $config['dimension_unit']   = 'IN'; // FT, CM, etc
 // site logo path (for packing slip)
 $config['site_logo']		= '/assets/img/logo.png';
 
-//change the name of the admin controller folder 
+//change the name of the admin controller folder
 $config['admin_folder']		= 'admin';
 
 //file upload size limit
@@ -40,7 +40,7 @@ $config['size_limit']		= intval(ini_get('upload_max_filesize'))*1024;
 //are new registrations automatically approved (true/false)
 $config['new_customer_status']	= true;
 
-//do we require customers to log in 
+//do we require customers to log in
 $config['require_login']		= false;
 
 //default order status
@@ -50,12 +50,12 @@ $config['order_status']			= 'Pending';
 $config['nonship_status'] = 'Delivered';
 
 $config['order_statuses']	= array(
-	'Pending'  				=> 'Pending',
-	'Processing'    		=> 'Processing',
-	'Shipped'				=> 'Shipped',
-	'On Hold'				=> 'On Hold',
-	'Cancelled'				=> 'Cancelled',
-	'Delivered'				=> 'Delivered'
+		'Pending'  				=> 'Pending',
+		'Processing'    		=> 'Processing',
+		'Shipped'				=> 'Shipped',
+		'On Hold'				=> 'On Hold',
+		'Cancelled'				=> 'Cancelled',
+		'Delivered'				=> 'Delivered'
 );
 
 // enable inventory control ?

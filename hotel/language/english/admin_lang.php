@@ -1,6 +1,6 @@
 <?php
 /******************************************
-US English
+ US English
 Admin Administrator Management Language
 ******************************************/
 

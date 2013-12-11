@@ -45,9 +45,11 @@ function areyousure()
 
 
 
-<a style="float:right;" class="btn" href="<?php echo site_url($this->config->item('admin_folder').'/banners/form'); ?>"><i class="icon-plus-sign"></i> <?php echo lang('add_new_banner');?></a>
+<a style="float: right;" class="btn"
+	href="<?php echo site_url($this->config->item('admin_folder').'/banners/form'); ?>"><i
+	class="icon-plus-sign"></i> <?php echo lang('add_new_banner');?> </a>
 
-<strong style="float:left;"><?php echo lang('sort_banners')?></strong>
+<strong style="float: left;"><?php echo lang('sort_banners')?> </strong>
 
 <table class="table table-striped">
 	<thead>
@@ -62,9 +64,9 @@ function areyousure()
 	<?php echo (count($banners) < 1)?'<tr><td style="text-align:center;" colspan="5">'.lang('no_banners').'</td></tr>':''?>
 	<?php if ($banners): ?>
 	<tbody id="banners_sortable">
-	<?php
+		<?php
 
-	foreach ($banners as $banner):
+		foreach ($banners as $banner):
 
 		//clear the dates out if they're all zeros
 		if ($banner->enable_on == '0000-00-00')
@@ -101,18 +103,24 @@ function areyousure()
 		}
 		?>
 		<tr id="banners-<?php echo $banner->id;?>">
-			<td class="handle"><a class="btn" style="cursor:move"><span class="icon-align-justify"></span></a></td>
+			<td class="handle"><a class="btn" style="cursor: move"><span
+					class="icon-align-justify"></span> </a></td>
 			<td><?php echo $disabled_icon.$banner->title;?></td>
 			<td><?php echo $enable;?></td>
 			<td><?php echo $disable;?></td>
 			<td>
-				<div class="btn-group" style="float:right">
-					<a class="btn" href="<?php echo  site_url($this->config->item('admin_folder').'/banners/form/'.$banner->id);?>"><i class="icon-pencil"></i> <?php echo lang('edit');?></a>
-					<a class="btn btn-danger" href="<?php echo  site_url($this->config->item('admin_folder').'/banners/delete/'.$banner->id);?>" onclick="return areyousure();"><i class="icon-trash icon-white"></i> <?php echo lang('delete');?></a>
+				<div class="btn-group" style="float: right">
+					<a class="btn"
+						href="<?php echo  site_url($this->config->item('admin_folder').'/banners/form/'.$banner->id);?>"><i
+						class="icon-pencil"></i> <?php echo lang('edit');?> </a> <a
+						class="btn btn-danger"
+						href="<?php echo  site_url($this->config->item('admin_folder').'/banners/delete/'.$banner->id);?>"
+						onclick="return areyousure();"><i class="icon-trash icon-white"></i>
+						<?php echo lang('delete');?> </a>
 				</div>
 			</td>
 		</tr>
-	<?php endforeach; ?>
+		<?php endforeach; ?>
 	</tbody>
 	<?php endif;?>
 </table>

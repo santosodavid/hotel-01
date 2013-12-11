@@ -1,12 +1,12 @@
 <?php
 
-class My_Router extends CI_Router 
+class My_Router extends CI_Router
 {
 	function __construct()
 	{
 		parent::__construct();
 	}
-	
+
 	// this is here to add an additional layer to the routing system.
 	//If a route isn't found in the routes config file. then it will scan the database for a matching route.
 	function _parse_routes()
@@ -15,7 +15,7 @@ class My_Router extends CI_Router
 
 		// Turn the segment array into a URI string
 		$uri = implode('/', $segments);
-		
+
 		// Is there a literal match?  If so we're done
 		if (isset($this->routes[$uri]))
 		{
@@ -40,7 +40,7 @@ class My_Router extends CI_Router
 				return $this->_set_request(explode('/', $val));
 			}
 		}
-		
+
 		// now try the GoCart specific routing
 		$segments = array_splice($segments, -2, 2);
 
@@ -50,18 +50,18 @@ class My_Router extends CI_Router
 		//look through the database for a route that matches and apply the same logic as above :-)
 		//load the database connection information
 		require_once BASEPATH.'database/DB'.EXT;
-		
+
 		if(count($segments) == 1)
 		{
 			$row	= $this->_get_db_route($segments[0]);
-			
+				
 			if(!empty($row))
 			{
 				return $this->_set_request(explode('/', $row['route']));
 			}
 		}
 		else
-		{	
+		{
 			$segments	= array_reverse($segments);
 			//start with the end just to make sure we're not a multi-tiered category or category/product combo before moving to the second segment
 			//we could stop people from naming products or categories after numbers, but that would be limiting their use.
@@ -78,7 +78,7 @@ class My_Router extends CI_Router
 				$row	= $this->_get_db_route($segments[1]);
 				$page_flag	= true;
 			}
-			
+				
 			//we have a hit, continue down the path!
 			if($row)
 			{
@@ -89,7 +89,7 @@ class My_Router extends CI_Router
 				else
 				{
 					$key = $row['slug'].'/([0-9]+)';
-					
+						
 					//pages can only be numerical. This could end in a mighty big error!!!!
 					if (preg_match('#^'.$key.'$#', $uri))
 					{
@@ -99,12 +99,12 @@ class My_Router extends CI_Router
 				}
 			}
 		}
-		
+
 		// If we got this far it means we didn't encounter a
 		// matching route so we'll set the site default route
 		$this->_set_request($this->uri->segments);
 	}
-	
+
 	function _get_db_route($slug)
 	{
 		return DB()->where('slug',$slug)->get('routes')->row_array();

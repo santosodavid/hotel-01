@@ -1,18 +1,18 @@
 <?php
 
 $m	= Array(
-lang('january')
-,lang('february')
-,lang('march')
-,lang('april')
-,lang('may')
-,lang('june')
-,lang('july')
-,lang('august')
-,lang('september')
-,lang('october')
-,lang('november')
-,lang('december')
+		lang('january')
+		,lang('february')
+		,lang('march')
+		,lang('april')
+		,lang('may')
+		,lang('june')
+		,lang('july')
+		,lang('august')
+		,lang('september')
+		,lang('october')
+		,lang('november')
+		,lang('december')
 );
 ?>
 
@@ -30,7 +30,7 @@ lang('january')
 		</tr>
 	</thead>
 	<tbody>
-<?php foreach($orders as $month):?>
+		<?php foreach($orders as $month):?>
 		<tr>
 			<td><?php echo $m[intval($month->month)-1].' '.$month->year;?></td>
 			<td><?php echo format_currency($month->coupon_discounts);?></td>
@@ -40,7 +40,7 @@ lang('january')
 			<td><?php echo format_currency($month->tax);?></td>
 			<td><?php echo format_currency($month->total);?></td>
 		</tr>
-<?php endforeach;?>
+		<?php endforeach;?>
 	</tbody>
 </table>
 

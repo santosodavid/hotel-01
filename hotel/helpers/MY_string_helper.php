@@ -17,12 +17,12 @@ function form_decode(&$x)
 			$y = form_decode($y);
 		}
 	}
-	
+
 	if(is_string($x))
 	{
 		$x	= full_decode($x);
 	}
-	
+
 	return $x;
 }
 
@@ -42,7 +42,7 @@ function generate_code($length=16)
 {
 	$vowels = '0123';
 	$consonants = '456789ABCDEF';
- 
+
 	$password = '';
 	$alt = time() % 2;
 	for ($i = 0; $i < $length; $i++) {

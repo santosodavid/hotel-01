@@ -9,11 +9,11 @@ Class Box_model extends CI_Model
 		}
 		return $this->db->order_by('sequence ASC')->get('boxes')->result();
 	}
-	
+
 	function get_homepage_boxes($limit = false)
 	{
 		$boxes	= $this->db->order_by('sequence ASC')->get('boxes')->result();
-		
+
 		$return	= array();
 		foreach ($boxes as $box)
 		{
@@ -51,7 +51,7 @@ Class Box_model extends CI_Model
 			{
 				$return[]	= $box;
 			}
-			
+				
 			if($limit && $limit <= count($return))
 			{
 				break;
@@ -59,42 +59,42 @@ Class Box_model extends CI_Model
 		}
 		return $return;
 	}
-	
+
 	function get_box($id)
 	{
 		$this->db->where('id', $id);
 		$result = $this->db->get('boxes');
 		$result = $result->row();
-		
+
 		if ($result)
 		{
 			if ($result->enable_on == '0000-00-00')
 			{
 				$result->enable_on = '';
 			}
-			
+				
 			if ($result->disable_on == '0000-00-00')
 			{
 				$result->disable_on = '';
 			}
-		
+
 			return $result;
 		}
 		else
-		{ 
+		{
 			return array();
 		}
 	}
-	
+
 	function delete($id)
 	{
-		
+
 		$box	= $this->get_box($id);
 		if ($box)
 		{
 			$this->db->where('id', $id);
 			$this->db->delete('boxes');
-			
+				
 			return 'The "'.$box->title.'" box has been removed.';
 		}
 		else
@@ -102,7 +102,7 @@ Class Box_model extends CI_Model
 			return 'The box could not be found.';
 		}
 	}
-	
+
 	function get_next_sequence()
 	{
 		$this->db->select('sequence');
@@ -119,7 +119,7 @@ Class Box_model extends CI_Model
 			return 0;
 		}
 	}
-	
+
 	function save($data)
 	{
 		if(isset($data['id']))
@@ -133,7 +133,7 @@ Class Box_model extends CI_Model
 			$this->db->insert('boxes', $data);
 		}
 	}
-	
+
 	function organize($boxes)
 	{
 		foreach ($boxes as $sequence => $id)

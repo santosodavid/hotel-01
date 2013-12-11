@@ -7,13 +7,13 @@
  * @copyright (C) 2008 martin maly
  * @see  http://www.php-suit.com/paypal
  * 2.10.2008 20:30:40
- 
+
  ** Mofified for compatibility with GoCart, by Clear Sky Designs
- 
+
  */
- 
+
 /*
-* Copyright (c) 2008 Martin Maly - http://www.php-suit.com
+ * Copyright (c) 2008 Martin Maly - http://www.php-suit.com
 * All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without
@@ -44,7 +44,7 @@ class PayPal {
 	private $API_USERNAME;
 	private $API_PASSWORD;
 	private $API_SIGNATURE;
-	
+
 	private $RETURN_URL;
 	private $CANCEL_URL;
 
@@ -55,22 +55,22 @@ class PayPal {
 	private $CI;
 
 	function __construct() {
-		
+
 		$this->endpoint = '/nvp';
 		$this->CI =& get_instance();
-		
+
 		// retrieve settings
-		if ( $settings = $this->CI->Settings_model->get_settings('paypal_express') ) 
+		if ( $settings = $this->CI->Settings_model->get_settings('paypal_express') )
 		{
 			$this->API_USERNAME = $settings['username'];
 			$this->API_PASSWORD = $settings['password'];
 			$this->API_SIGNATURE = $settings['signature'];
-			
+				
 			$this->RETURN_URL = $settings["return_url"];
 			$this->CANCEL_URL = $settings["cancel_url"];
-			
+				
 			$this->currency = $settings['currency'];
-			
+				
 			// Test mode?
 			if (!$settings['SANDBOX']) {
 				$this->host = "api-3t.paypal.com";
@@ -123,28 +123,28 @@ class PayPal {
 
 	/**
 	 * Main payment function
-	 * 
+	 *
 	 * If OK, the customer is redirected to PayPal gateway
 	 * If error, the error info is returned
-	 * 
+	 *
 	 * @param float $amount Amount (2 numbers after decimal point)
 	 * @param string $desc Item description
 	 * @param string $invoice Invoice number (can be omitted)
 	 * @param string $currency 3-letter currency code (USD, GBP, CZK etc.)
-	 * 
+	 *
 	 * @return array error info
 	 */
 	public function doExpressCheckout($amount, $desc, $invoice=''){
 		$data = array(
-		'PAYMENTACTION' =>'Sale',
-		'AMT' => $amount,
-		'RETURNURL' => $this->getReturnTo(),
-		'CANCELURL'  => $this->getReturnToCancel(),
-		'DESC'=> $desc,
-		'NOSHIPPING'=> "1",
-		'ALLOWNOTE'=> "1",
-		'CURRENCYCODE'=> $this->currency,
-		'METHOD' => 'SetExpressCheckout');
+				'PAYMENTACTION' =>'Sale',
+				'AMT' => $amount,
+				'RETURNURL' => $this->getReturnTo(),
+				'CANCELURL'  => $this->getReturnToCancel(),
+				'DESC'=> $desc,
+				'NOSHIPPING'=> "1",
+				'ALLOWNOTE'=> "1",
+				'CURRENCYCODE'=> $this->currency,
+				'METHOD' => 'SetExpressCheckout');
 
 		$data['CUSTOM'] = $amount.'|'.$this->currency.'|'.$invoice;
 		if ($invoice) $data['INVNUM'] = $invoice;
@@ -166,8 +166,8 @@ class PayPal {
 
 	public function getCheckoutDetails($token){
 		$data = array(
-		'TOKEN' => $token,
-		'METHOD' =>'GetExpressCheckoutDetails');
+				'TOKEN' => $token,
+				'METHOD' =>'GetExpressCheckoutDetails');
 		$query = $this->buildQuery($data);
 
 		$result = $this->response($query);
@@ -177,23 +177,23 @@ class PayPal {
 		$return = $this->responseParse($response);
 		return($return);
 	}
-	
-	
+
+
 	public function doPayment()
 	{
 		$token = $_GET['token'];
 		$payer = $_GET['PayerID'];
-		
+
 		$details = $this->getCheckoutDetails($token);
 		if (!$details) return false;
 		list($amount,$currency,$invoice) = explode('|',$details['CUSTOM']);
 		$data = array(
-		'PAYMENTACTION' => 'Sale',
-		'PAYERID' => $payer,
-		'TOKEN' =>$token,
-		'AMT' => $amount,
-		'CURRENCYCODE'=>$currency,
-		'METHOD' =>'DoExpressCheckoutPayment');
+				'PAYMENTACTION' => 'Sale',
+				'PAYERID' => $payer,
+				'TOKEN' =>$token,
+				'AMT' => $amount,
+				'CURRENCYCODE'=>$currency,
+				'METHOD' =>'DoExpressCheckoutPayment');
 		$query = $this->buildQuery($data);
 
 		$result = $this->response($query);
@@ -204,11 +204,11 @@ class PayPal {
 
 		/*
 		 * [AMT] => 10.00
-		 * [CURRENCYCODE] => USD
-		 * [PAYMENTSTATUS] => Completed
-		 * [PENDINGREASON] => None
-		 * [REASONCODE] => None
-		 */
+		* [CURRENCYCODE] => USD
+		* [PAYMENTSTATUS] => Completed
+		* [PENDINGREASON] => None
+		* [REASONCODE] => None
+		*/
 
 		return($return);
 	}

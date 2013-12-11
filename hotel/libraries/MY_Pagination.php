@@ -1,6 +1,6 @@
 <?php
-/* 
-Slight adjustment to the create_links function
+/*
+ Slight adjustment to the create_links function
 
 we have query strings enabled for paypal but we don't want to use them anywhere else in the cart
 so this method is getting changed to make query strings only if it's configured to do so.
@@ -11,21 +11,21 @@ class MY_Pagination extends CI_Pagination
 	{
 		parent::__construct();
 	}
-	
+
 	// --------------------------------------------------------------------
-	
+
 	/**
 	 * Generate the pagination links
 	 *
 	 * @access	public
 	 * @return	string
-	 */	
+	 */
 	function create_links()
 	{
 		// If our item count or per-page total is zero there is no need to continue.
 		if ($this->total_rows == 0 OR $this->per_page == 0)
 		{
-		   return '';
+			return '';
 		}
 
 		// Calculate the total number of pages
@@ -37,15 +37,15 @@ class MY_Pagination extends CI_Pagination
 			return '';
 		}
 
-		// Determine the current page number.		
+		// Determine the current page number.
 		$CI =& get_instance();
-		
+
 		if ($this->page_query_string === TRUE)
 		{
 			if ($CI->input->get($this->query_string_segment) != 0)
 			{
 				$this->cur_page = $CI->input->get($this->query_string_segment);
-				
+
 				// Prep the current page - no funny business!
 				$this->cur_page = (int) $this->cur_page;
 			}
@@ -55,31 +55,31 @@ class MY_Pagination extends CI_Pagination
 			if ($CI->uri->segment($this->uri_segment) != 0)
 			{
 				$this->cur_page = $CI->uri->segment($this->uri_segment);
-				
+
 				// Prep the current page - no funny business!
 				$this->cur_page = (int) $this->cur_page;
 			}
 		}
 
 		$this->num_links = (int)$this->num_links;
-		
+
 		if ($this->num_links < 1)
 		{
 			show_error('Your number of links must be a positive number.');
 		}
-				
+
 		if ( ! is_numeric($this->cur_page))
 		{
 			$this->cur_page = 0;
 		}
-		
+
 		// Is the page number beyond the result range?
 		// If so we show the last page
 		if ($this->cur_page > $this->total_rows)
 		{
 			$this->cur_page = ($num_pages - 1) * $this->per_page;
 		}
-		
+
 		$uri_page_number = $this->cur_page;
 		$this->cur_page = floor(($this->cur_page/$this->per_page) + 1);
 
@@ -107,12 +107,12 @@ class MY_Pagination extends CI_Pagination
 				$get_sort	= '/?by='.$_GET['by'];
 			}
 		}
-		
-		
-		
-  		// And here we go...
+
+
+
+		// And here we go...
 		$output = '';
-		
+
 		// Render the "First" link
 		if  ($this->cur_page > ($this->num_links + 1))
 		{
@@ -131,7 +131,7 @@ class MY_Pagination extends CI_Pagination
 		for ($loop = $start -1; $loop <= $end; $loop++)
 		{
 			$i = ($loop * $this->per_page) - $this->per_page;
-					
+				
 			if ($i >= 0)
 			{
 				if ($this->cur_page == $loop)
@@ -165,7 +165,7 @@ class MY_Pagination extends CI_Pagination
 
 		// Add the wrapper HTML if exists
 		$output = $this->full_tag_open.$output.$this->full_tag_close;
-		
-		return $output;		
+
+		return $output;
 	}
 }

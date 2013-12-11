@@ -4,42 +4,42 @@ class table_rate
 {
 	var $CI;
 	var $cart;
-	
+
 	function table_rate()
 	{
 		$this->CI =& get_instance();
 		$this->CI->lang->load('table_rate');
 	}
-	
+
 	function rates()
 	{
-		//$method either equals weight or price	
+		//$method either equals weight or price
 		//this can be set either from some sort of admin panel, or directly here.
 		$this->CI->load->library('session');
-		
+
 		// get customer info
 		$customer = $this->CI->go_cart->customer();
-		
+
 		//if there is no address set then return blank
 		if(empty($customer['ship_address']))
 		{
 			return array();
 		}
-		
+
 		$settings	= $this->CI->Settings_model->get_settings('table_rate');
-		
+
 		if(!(bool)$settings['enabled'])
 		{
 			return array();
 		}
-		
+
 		$rates			= unserialize($settings['rates']);
-		
+
 		$order_weight	= $this->get_order_weight();
 		$order_price	= $this->get_order_price();
-		
+
 		$countries = $this->CI->Location_model->get_countries();
-		
+
 		$return = array();
 		foreach($rates as $rate)
 		{
@@ -75,46 +75,46 @@ class table_rate
 				}
 			}
 		}
-		
+
 		return $return;
 	}
-	
+
 	function install()
 	{
-		
+
 		$install			= array();
 		$install['enabled']	= false;
-		
+
 		$rate				= array();
 		$rate[0]			= array();
 		$rate[0]['name']	= 'Example';
 		$rate[0]['method']	= 'price';
 		$rate[0]['country']	= 0;
-		
+
 		// install some example data
 		$rate[0]['rates'] =  array(
-					 '80'	=> '85.00'
-					,'70'	=> '65.00'
-					,'60'	=> '55.00'
-					,'50'	=> '55.00'
-					,'40'	=> '45.00'
-					,'30'	=> '35.00'
-					,'20'	=> '25.00'
-					,'10'	=> '15.00'
-					,'0'	=> '5.00');
-		
+				'80'	=> '85.00'
+				,'70'	=> '65.00'
+				,'60'	=> '55.00'
+				,'50'	=> '55.00'
+				,'40'	=> '45.00'
+				,'30'	=> '35.00'
+				,'20'	=> '25.00'
+				,'10'	=> '15.00'
+				,'0'	=> '5.00');
+
 		$install['rates']	= serialize($rate);
-		
+
 		$this->CI->Settings_model->save_settings('table_rate', $install);
 	}
-	
+
 	function uninstall()
 	{
 		$this->CI->Settings_model->delete_settings('table_rate');
 	}
-	
+
 	function form($_POST	= false)
-	{ 
+	{
 		$this->CI->load->helper('form');
 		//this same function processes the form
 		if(!$_POST)
@@ -127,25 +127,25 @@ class table_rate
 			$settings['enabled']	= $_POST['enabled'];
 			$settings['rates']		= $_POST['rates'];
 		}
-		
+
 		$countries					= $this->CI->Location_model->get_countries_menu();
-		
+
 		$data						= $settings;
 		$data['countries']			= array(0=>lang('all_countries')) + $countries;
-		
+
 		return $this->CI->load->view('table_rate_form', $data, true);
-		
+
 	}
-	
+
 	function check()
-	{	
+	{
 		if(empty($_POST))
 		{
 			return '<div>'.lang('empty_post').'</div>';
 		}
-		
+
 		$save['enabled']	= $_POST['enabled'];
-		
+
 		$rates				= array();
 		foreach($_POST['rate'] as $rate)
 		{
@@ -157,18 +157,18 @@ class table_rate
 			{
 				$rate['rates']	= array();
 			}
-			
+				
 			$rates[]		= $rate;
 		}
 		$save['rates']	= serialize($rates);
-		
+
 		//we save the settings if it gets here
 		$this->CI->Settings_model->save_settings('table_rate', $save);
-		
+
 		return false;
-		
+
 	}
-	
+
 	function organize_rates($rates)
 	{
 		$new_rates	= array();
@@ -182,12 +182,12 @@ class table_rate
 		}
 		return $new_rates;
 	}
-	
-	
+
+
 	function organize_post_rates($_POST)
 	{
 		$rates	= array();
-		
+
 		foreach($_POST['from'] as $table=>$list)
 		{
 			foreach($list as $key=>$value)
@@ -198,15 +198,15 @@ class table_rate
 			krsort($rates[$table]);
 		}
 
-		
+
 		return $rates;
 	}
-	
+
 	function get_order_weight()
 	{
 		return $this->CI->go_cart->order_weight();
 	}
-	
+
 	function get_order_price()
 	{
 		return $this->CI->go_cart->subtotal();

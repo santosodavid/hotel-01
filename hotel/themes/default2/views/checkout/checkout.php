@@ -1,31 +1,38 @@
 
 <style type="text/css">
-	.checkout-stage {
-		padding:10px;
-		background-color:#f2f2f2;
-		color:#bbbbbb;
-		border:1px solid #eee;
-		text-shadow: 0px 1px 0px #ffffff;
-		font-family:'Helvetica Neue',Helvetica, Arial, sans-serif;
-		font-weight:300;
-		-webkit-border-radius: 4px;
-		-moz-border-radius: 4px;
-		border-radius: 4px;
-		font-size:25px;
-	}
-	.checkout-loading {
-		text-align:center;
-		margin:30px 0px;
-	}
+.checkout-stage {
+	padding: 10px;
+	background-color: #f2f2f2;
+	color: #bbbbbb;
+	border: 1px solid #eee;
+	text-shadow: 0px 1px 0px #ffffff;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-weight: 300;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	font-size: 25px;
+}
+
+.checkout-loading {
+	text-align: center;
+	margin: 30px 0px;
+}
 </style>
 <div class="row">
-	<div class="span12" style="margin-bottom:10px;">
+	<div class="span12" style="margin-bottom: 10px;">
 		<div class="btn-group pull-right">
 			<?php if(!$this->Customer_model->is_logged_in(false, false)) : ?>
-				<input class="btn" type="button" onclick="window.location='<?php echo site_url('checkout/login');?>'" value="<?php echo lang('form_login');?>" />
-				<input class="btn" type="button" onclick="window.location='<?php echo site_url('checkout/register');?>'" value="<?php echo lang('register_now');?>"/>
+			<input class="btn" type="button"
+				onclick="window.location='<?php echo site_url('checkout/login');?>'"
+				value="<?php echo lang('form_login');?>" /> <input class="btn"
+				type="button"
+				onclick="window.location='<?php echo site_url('checkout/register');?>'"
+				value="<?php echo lang('register_now');?>" />
 			<?php endif;?>
-			<input class="btn" type="button" onclick="window.location='<?php echo site_url();?>'" value="<?php echo lang('continue_shopping');?>"/>
+			<input class="btn" type="button"
+				onclick="window.location='<?php echo site_url();?>'"
+				value="<?php echo lang('continue_shopping');?>" />
 		</div>
 	</div>
 </div>
@@ -33,9 +40,7 @@
 <div class="checkout-stage">
 	<?php echo lang('customer_information');?>
 </div>
-<div id="customer-info-container">
-	
-</div>
+<div id="customer-info-container"></div>
 
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -283,38 +288,50 @@ function update_summary()
 </script>
 
 <div class="row">
-	<div class="span12" style="margin-bottom:10px;">
+	<div class="span12" style="margin-bottom: 10px;">
 		<div class="btn-group pull-right">
 			<?php if(!$this->Customer_model->is_logged_in(false, false)) : ?>
-				<input class="btn" type="button" onclick="window.location='<?php echo site_url('checkout/login');?>'" value="<?php echo lang('form_login');?>" />
-				<input class="btn" type="button" onclick="window.location='<?php echo site_url('checkout/register');?>'" value="<?php echo lang('register_now');?>"/>
+			<input class="btn" type="button"
+				onclick="window.location='<?php echo site_url('checkout/login');?>'"
+				value="<?php echo lang('form_login');?>" /> <input class="btn"
+				type="button"
+				onclick="window.location='<?php echo site_url('checkout/register');?>'"
+				value="<?php echo lang('register_now');?>" />
 			<?php endif;?>
-			<input class="btn" type="button" onclick="window.location='<?php echo base_url();?>'" value="<?php echo lang('continue_shopping');?>"/>
+			<input class="btn" type="button"
+				onclick="window.location='<?php echo base_url();?>'"
+				value="<?php echo lang('continue_shopping');?>" />
 		</div>
 	</div>
 </div>
 
-<div class="row" style="margin-bottom:10px;">
-	<div class="span12" id="customer_info_fields" style="border-bottom:4px solid #ddd; padding-bottom:15px;">
-		<img alt="loading" src="<?php echo theme_img('ajax-loader.gif');?>"/>
+<div class="row" style="margin-bottom: 10px;">
+	<div class="span12" id="customer_info_fields"
+		style="border-bottom: 4px solid #ddd; padding-bottom: 15px;">
+		<img alt="loading" src="<?php echo theme_img('ajax-loader.gif');?>" />
 	</div>
 </div>
 
-<div id="shipping_payment_container" style="display:none;">
-	<img alt="loading" src="<?php echo theme_img('ajax-loader.gif');?>"/>
+<div id="shipping_payment_container" style="display: none;">
+	<img alt="loading" src="<?php echo theme_img('ajax-loader.gif');?>" />
 </div>
 
 <div id="summary_section">
-<?php  include('summary.php'); ?>
+	<?php  include('summary.php'); ?>
 </div>
 
-<div id="submit_button_container" style="display:none; text-align:center; padding-top:10px; clear:both;">
-	<form id="order_submit_form" action="<?php echo site_url('checkout/place_order'); ?>" method="post">
+<div id="submit_button_container"
+	style="display: none; text-align: center; padding-top: 10px; clear: both;">
+	<form id="order_submit_form"
+		action="<?php echo site_url('checkout/place_order'); ?>" method="post">
 		<input type="hidden" name="process_order" value="true">
 
-		<div style="text-align:center; margin:10px; display:none;" id="submit-form-loader">
-			<img alt="loading" src="<?php echo theme_img('ajax-loader.gif');?>"/>
+		<div style="text-align: center; margin: 10px; display: none;"
+			id="submit-form-loader">
+			<img alt="loading" src="<?php echo theme_img('ajax-loader.gif');?>" />
 		</div>
-		<input style="padding:10px 15px; font-size:16px;" type="button" class="btn btn-primary btn-large" onclick="submit_payment_method()" value="<?php echo lang('submit_order');?>" />
+		<input style="padding: 10px 15px; font-size: 16px;" type="button"
+			class="btn btn-primary btn-large" onclick="submit_payment_method()"
+			value="<?php echo lang('submit_order');?>" />
 	</form>
 </div>

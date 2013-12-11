@@ -29,7 +29,7 @@ class Checkout extends Front_Controller {
 			if($inventory_check)
 			{
 				/*
-				OOPS we have an error. someone else has gotten the scoop on our customer and bought products out from under them!
+				 OOPS we have an error. someone else has gotten the scoop on our customer and bought products out from under them!
 				we need to redirect them to the view cart page and let them know that the inventory is no longer there.
 				*/
 				$this->session->set_flashdata('error', $inventory_check);
@@ -37,13 +37,13 @@ class Checkout extends Front_Controller {
 			}
 		}
 		/* Set no caching
-	
+
 		header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-		header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT"); 
-		header("Cache-Control: no-store, no-cache, must-revalidate"); 
+		header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+		header("Cache-Control: no-store, no-cache, must-revalidate");
 		header("Cache-Control: post-check=0, pre-check=0", false);
 		header("Pragma: no-cache");
-	
+
 		*/
 		$this->load->library('form_validation');
 	}
@@ -75,7 +75,7 @@ class Checkout extends Front_Controller {
 		$this->form_validation->set_rules('city', 'City', 'trim|required|max_length[128]');
 		$this->form_validation->set_rules('country_id', 'Country', 'trim|required|numeric');
 		$this->form_validation->set_rules('zone_id', 'State', 'trim|required|numeric');
-		
+
 		/*if there is post data, get the country info and see if the zip code is required*/
 		if($this->input->post('country_id'))
 		{
@@ -116,7 +116,7 @@ class Checkout extends Front_Controller {
 
 			$customer['bill_address']['zone']			= $zone->code;  /*  save the state for output formatted addresses */
 			$customer['bill_address']['country']		= $country->name; /*  some shipping libraries require country name */
-			$customer['bill_address']['country_code']   = $country->iso_code_2; /*  some shipping libraries require the code */ 
+			$customer['bill_address']['country_code']   = $country->iso_code_2; /*  some shipping libraries require the code */
 			$customer['bill_address']['zone_id']		= $this->input->post('zone_id');  /*  use the zone id to populate address state field value */
 			$customer['bill_address']['country_id']		= $this->input->post('country_id');
 
@@ -140,7 +140,7 @@ class Checkout extends Front_Controller {
 			{
 				$customer['ship_address']	= $customer['bill_address'];
 			}
-			
+				
 			/* save customer details*/
 			$this->go_cart->save_customer($customer);
 
@@ -170,7 +170,7 @@ class Checkout extends Front_Controller {
 		$this->form_validation->set_rules('city', 'lang:address_city', 'trim|required|max_length[128]');
 		$this->form_validation->set_rules('country_id', 'lang:address_country', 'trim|required|numeric');
 		$this->form_validation->set_rules('zone_id', 'lang:address_state', 'trim|required|numeric');
-		
+
 		/* if there is post data, get the country info and see if the zip code is required */
 		if($this->input->post('country_id'))
 		{
@@ -288,9 +288,9 @@ class Checkout extends Front_Controller {
 	}
 
 	/*
-		callback for shipping form 
-		if callback is true then it's being called for form_Validation
-		In that case, set the message otherwise just return true or false
+		callback for shipping form
+	if callback is true then it's being called for form_Validation
+	In that case, set the message otherwise just return true or false
 	*/
 	function validate_shipping_option($str, $callback=true)
 	{
@@ -335,7 +335,7 @@ class Checkout extends Front_Controller {
 				}
 
 				/*  Free shipping coupon applied ? */
-				if($this->go_cart->is_free_shipping()) 
+				if($this->go_cart->is_free_shipping())
 				{
 					/*  add free shipping as an option, but leave other options in case they want to upgrade */
 					$shipping_methods[lang('free_shipping_basic')] = "0.00";
@@ -363,7 +363,7 @@ class Checkout extends Front_Controller {
 	function step_3()
 	{
 		/*
-		Some error checking
+		 Some error checking
 		see if we have the billing address
 		*/
 		$customer	= $this->go_cart->customer();
@@ -406,7 +406,7 @@ class Checkout extends Front_Controller {
 
 		/* pass in the payment methods */
 		$data['payment_methods']	= $payment_methods;
-		
+
 		/* require that a payment method is selected */
 		$this->form_validation->set_rules('module', 'lang:payment_method', 'trim|required|xss_clean|callback_check_payment');
 
@@ -495,17 +495,17 @@ class Checkout extends Front_Controller {
 	}
 
 	function place_order()
-	{		
+	{
 		// retrieve the payment method
 		$payment 			= $this->go_cart->payment_method();
 		$payment_methods	= $this->_get_payment_methods();
-		
+
 		//make sure they're logged in if the config file requires it
 		if($this->config->item('require_login'))
 		{
 			$this->Customer_model->is_logged_in();
 		}
-		
+
 		// are we processing an empty cart?
 		$contents = $this->go_cart->contents();
 		if(empty($contents))
@@ -518,13 +518,13 @@ class Checkout extends Front_Controller {
 				redirect('checkout/step_3');
 			}
 		}
-		
+
 		if(!empty($payment) && (bool)$payment_methods == true)
 		{
 			//load the payment module
 			$this->load->add_package_path(APPPATH.'packages/payment/'.$payment['module'].'/');
 			$this->load->library($payment['module']);
-		
+
 			// Is payment bypassed? (total is zero, or processed flag is set)
 			if($this->go_cart->total() > 0 && ! isset($payment['confirmed'])) {
 				//run the payment
@@ -538,21 +538,21 @@ class Checkout extends Front_Controller {
 			}
 		}
 			
-		
+
 		// save the order
 		$order_id = $this->go_cart->save_order();
-		
+
 		$data['order_id']			= $order_id;
 		$data['shipping']			= $this->go_cart->shipping_method();
 		$data['payment']			= $this->go_cart->payment_method();
 		$data['customer']			= $this->go_cart->customer();
 		$data['shipping_notes']		= $this->go_cart->get_additional_detail('shipping_notes');
 		$data['referral']			= $this->go_cart->get_additional_detail('referral');
-		
+
 		$order_downloads 			= $this->go_cart->get_order_downloads();
-		
+
 		$data['hide_menu']			= true;
-		
+
 		// run the complete payment module method once order has been saved
 		if(!empty($payment))
 		{
@@ -561,19 +561,19 @@ class Checkout extends Front_Controller {
 				$this->$payment['module']->complete_payment($data);
 			}
 		}
-	
+
 		// Send the user a confirmation email
-		
+
 		// - get the email template
 		$this->load->model('messages_model');
 		$row = $this->messages_model->get_message(7);
-		
+
 		$download_section = '';
 		if( ! empty($order_downloads))
 		{
 			// get the download link segment to insert into our confirmations
 			$downlod_msg_record = $this->messages_model->get_message(8);
-			
+				
 			if(!empty($data['customer']['id']))
 			{
 				// they can access their downloads by logging in
@@ -583,35 +583,35 @@ class Checkout extends Front_Controller {
 				$download_section = str_replace('{download_link}', anchor('secure/my_downloads/'.$order_downloads['code'], lang('download_link')), $downlod_msg_record['content']);
 			}
 		}
-		
+
 		$row['content'] = html_entity_decode($row['content']);
-		
+
 		// set replacement values for subject & body
 		// {customer_name}
 		$row['subject'] = str_replace('{customer_name}', $data['customer']['firstname'].' '.$data['customer']['lastname'], $row['subject']);
 		$row['content'] = str_replace('{customer_name}', $data['customer']['firstname'].' '.$data['customer']['lastname'], $row['content']);
-		
+
 		// {url}
 		$row['subject'] = str_replace('{url}', $this->config->item('base_url'), $row['subject']);
 		$row['content'] = str_replace('{url}', $this->config->item('base_url'), $row['content']);
-		
+
 		// {site_name}
 		$row['subject'] = str_replace('{site_name}', $this->config->item('company_name'), $row['subject']);
 		$row['content'] = str_replace('{site_name}', $this->config->item('company_name'), $row['content']);
 			
 		// {order_summary}
 		$row['content'] = str_replace('{order_summary}', $this->load->view('order_email', $data, true), $row['content']);
-		
+
 		// {download_section}
 		$row['content'] = str_replace('{download_section}', $download_section, $row['content']);
 			
 		$this->load->library('email');
-		
+
 		$config['mailtype'] = 'html';
 		$this->email->initialize($config);
 
 		$this->email->from($this->config->item('email'), $this->config->item('company_name'));
-		
+
 		if($this->Customer_model->is_logged_in(false, false))
 		{
 			$this->email->to($data['customer']['email']);
@@ -620,20 +620,20 @@ class Checkout extends Front_Controller {
 		{
 			$this->email->to($data['customer']['ship_address']['email']);
 		}
-		
+
 		//email the admin
 		$this->email->bcc($this->config->item('email'));
-		
+
 		$this->email->subject($row['subject']);
 		$this->email->message($row['content']);
-		
+
 		$this->email->send();
-		
+
 		$data['page_title'] = 'Thanks for shopping with '.$this->config->item('company_name');
 		$data['gift_cards_enabled'] = $this->gift_cards_enabled;
 		$data['download_section']	= $download_section;
-		
-		
+
+
 		/*  get all cart information before destroying the cart session info */
 		$data['go_cart']['group_discount']      = $this->go_cart->group_discount();
 		$data['go_cart']['subtotal']            = $this->go_cart->subtotal();

@@ -115,40 +115,50 @@ payment_method.authorize_net = function()
 
 
 
-	<div class="form_wrap">
-		<div>
-			<?php echo lang('address_firstname') ?><b class="r"> *</b><br/>
-			<input name="x_first_name" type="text" class="pmt_required textfield input" value="<?php echo @$cc_data["x_first_name"] ?>" size="30" />
-		</div>
-		<div>
-			<?php echo lang('address_lastname') ?><b class="r"> *</b><br/>
-			<input name="x_last_name" type="text" class="pmt_required textfield input" value="<?php echo @$cc_data["x_last_name"] ?>" size="30" />
-		</div>
+<div class="form_wrap">
+	<div>
+		<?php echo lang('address_firstname') ?>
+		<b class="r"> *</b><br /> <input name="x_first_name" type="text"
+			class="pmt_required textfield input"
+			value="<?php echo @$cc_data["x_first_name"] ?>" size="30" />
 	</div>
-	<div class="form_wrap">
-		<div>
-			<?php echo lang('card_number') ?><b class="r"> *</b><br/>
-			<input id="card_num" name="x_card_num" type="text" class="pmt_required textfield input" value="<?php echo @$cc_data["x_card_num"] ?>" size="30">
-		</div>
-		<div>
-			<?php echo lang('expires_on') ?><b class="r"> *</b><br/>
-			<?php
+	<div>
+		<?php echo lang('address_lastname') ?>
+		<b class="r"> *</b><br /> <input name="x_last_name" type="text"
+			class="pmt_required textfield input"
+			value="<?php echo @$cc_data["x_last_name"] ?>" size="30" />
+	</div>
+</div>
+<div class="form_wrap">
+	<div>
+		<?php echo lang('card_number') ?>
+		<b class="r"> *</b><br /> <input id="card_num" name="x_card_num"
+			type="text" class="pmt_required textfield input"
+			value="<?php echo @$cc_data["x_card_num"] ?>" size="30">
+	</div>
+	<div>
+		<?php echo lang('expires_on') ?>
+		<b class="r"> *</b><br />
+		<?php
 			
-			$months = array(1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8,9=>9,10=>10,11=>11,12=>12);
-			$y		= date('y');
-			$x		= $y+20;
-			$years	= array();
-			while($y < $x)
-			{
-				$years[$y] = $y;
-				$y++;
-			}
-			echo form_dropdown('x_exp_date_mm', $months, @$cc_data["x_exp_date_mm"], 'class="input"').'/'.form_dropdown('x_exp_date_yy', $years, @$cc_data["x_exp_date_yy"], 'class="input"');			
-			?>
-		</div>
-		<div>
-			<?php echo lang('cvv_code') ?><b class="r"> *</b><br/>
-			<input style="width:30px;"name="x_card_code" type="text" class="pmt_required textfield input" id="x_card_code" maxlength="4" value="<?php echo @$cc_data["x_card_code"] ?>" />
-		</div>
+		$months = array(1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8,9=>9,10=>10,11=>11,12=>12);
+		$y		= date('y');
+		$x		= $y+20;
+		$years	= array();
+		while($y < $x)
+		{
+			$years[$y] = $y;
+			$y++;
+		}
+		echo form_dropdown('x_exp_date_mm', $months, @$cc_data["x_exp_date_mm"], 'class="input"').'/'.form_dropdown('x_exp_date_yy', $years, @$cc_data["x_exp_date_yy"], 'class="input"');
+		?>
 	</div>
-	<br style="clear:both;">
+	<div>
+		<?php echo lang('cvv_code') ?>
+		<b class="r"> *</b><br /> <input style="width: 30px;"
+			name="x_card_code" type="text" class="pmt_required textfield input"
+			id="x_card_code" maxlength="4"
+			value="<?php echo @$cc_data["x_card_code"] ?>" />
+	</div>
+</div>
+<br style="clear: both;">

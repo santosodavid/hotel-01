@@ -1,30 +1,62 @@
-<div style="font-size:11px;margin-bottom:20px;"><?php echo lang('notice') ?></div>
-<h3>This is a legacy shipping method and is no longer being updated. table_rate is now the standard table rate shipping module and if you are using this method you should migrate to the new one.</h3>
-		<style type="text/css">
-		.tablerate_input {
-			width:50px;
-		}
-		
-		#enabler {
-			margin: 10px;
-		}
-		
-		#add_name {
-			margin: 10px;
-		}
-		
-		/* Vertical Tabs
-		----------------------------------*/
-		.ui-tabs-vertical { width: 55em; margin-bottom:20px; }
-		.ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 12em; }
-		.ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
-		.ui-tabs-vertical .ui-tabs-nav li a { display:block; }
-		.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-selected { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; border-right-width: 1px; }
-		.ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 40em;}
+<div style="font-size: 11px; margin-bottom: 20px;">
+	<?php echo lang('notice') ?>
+</div>
+<h3>This is a legacy shipping method and is no longer being updated.
+	table_rate is now the standard table rate shipping module and if you
+	are using this method you should migrate to the new one.</h3>
+<style type="text/css">
+.tablerate_input {
+	width: 50px;
+}
 
-		</style>
-		
-		<script type="text/javascript">
+#enabler {
+	margin: 10px;
+}
+
+#add_name {
+	margin: 10px;
+}
+
+/* Vertical Tabs
+		----------------------------------*/
+.ui-tabs-vertical {
+	width: 55em;
+	margin-bottom: 20px;
+}
+
+.ui-tabs-vertical .ui-tabs-nav {
+	padding: .2em .1em .2em .2em;
+	float: left;
+	width: 12em;
+}
+
+.ui-tabs-vertical .ui-tabs-nav li {
+	clear: left;
+	width: 100%;
+	border-bottom-width: 1px !important;
+	border-right-width: 0 !important;
+	margin: 0 -1px .2em 0;
+}
+
+.ui-tabs-vertical .ui-tabs-nav li a {
+	display: block;
+}
+
+.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-selected {
+	padding-bottom: 0;
+	padding-right: .1em;
+	border-right-width: 1px;
+	border-right-width: 1px;
+}
+
+.ui-tabs-vertical .ui-tabs-panel {
+	padding: 1em;
+	float: right;
+	width: 40em;
+}
+</style>
+
+<script type="text/javascript">
 			var tablecounts = {};
 			
 			$(function()
@@ -171,109 +203,147 @@
 			
 
 		</script>
-		
-		<div id="enabler">
-		<?php echo lang('enabled') ?> 
-		<select name="enabled">
-			
-			<?php 
-			if($settings['enabled'] == 1)
-			{
-				$enable		= ' selected="selected"';
-				$disable	= '';
-			}
-			else
-			{
-				$enable		= '';
-				$disable	= ' selected="selected"';
-			}
-			?>
-			<option value="1" <?php echo $enable ?>><?php echo lang('enabled') ?></option>
-			<option value="0" <?php echo $disable ?>><?php echo lang('disabled') ?></option>
-			</select>
-		</div>
-		
-		<div id='add_name'> <?php echo lang('add_tbl') ?> <input type="text" id="add_name_input" class="gc_tf1" /> <input type="button" value="Add" onclick='add_table()' /></div>		
-<div id="tabs">
-		
-		<ul id='name_list'>
-		<?php foreach($rates as $name=>$ratelist ) {  ?>
-			 <li> <a href="#tbl_<?php echo $name ?>" id='label_<?php echo $name ?>'><?php echo str_replace('_', ' ', $name); ?></a></li>
-		<?php } ?>
-		</ul>
-		<?php foreach ($rates as $name=>$table) { 
-				$disp_name = str_replace('_', ' ', $name);
+
+<div id="enabler">
+	<?php echo lang('enabled') ?>
+	<select name="enabled">
+
+		<?php 
+		if($settings['enabled'] == 1)
+		{
+			$enable		= ' selected="selected"';
+			$disable	= '';
+		}
+		else
+		{
+			$enable		= '';
+			$disable	= ' selected="selected"';
+		}
 		?>
-		<div id='tbl_<?php echo $name ?>' >
-			<strong><span id='<?php echo $name ?>_name'><?php echo $disp_name ?></span> <?php echo lang('rates') ?></strong> (<a href="javascript:void(0)" onclick="remove_table('tbl_<?php echo $name ?>')"><?php echo lang('btn_tbl_remove') ?></a>) (<a href="javascript:void(0)" onclick="rename_table('<?php echo $name ?>')"><?php echo lang('btn_rename') ?></a>) 
-			<table><tr>
-			
-			<div id="rename_<?php echo $name ?>" style="display:none">
-			
-			<input type="text" id="input_<?php echo $name ?>" value="<?php echo $disp_name ?>" class="gc_tf1"> <input type="button" value="Change" onclick="apply_rename('<?php echo $name ?>', '<?php echo $name ?>')" /> <input type="button" value="Cancel" onclick="cancel_rename('<?php echo $name ?>')" /></div>
-			
-			<td><?php echo lang('by_country') ?></td>
-			<td colspan="2">
-				<select name="location[<?php echo $name ?>]">
-				<option value=''> <?php echo lang('na') ?> </option>
-				<?php 
-				foreach($countries as $cid=>$c_name)
-				{	
-					echo '<option value="'.$cid.'"';
-					//set which option is selected
-					if(isset($settings['location'][$name]) && $settings['location'][$name]==$cid)
-					{
-						echo ' selected="selected"';
-					}
-					echo '>'.$c_name.'</option>';
-				}
-				?>
+		<option value="1" <?php echo $enable ?>>
+			<?php echo lang('enabled') ?>
+		</option>
+		<option value="0" <?php echo $disable ?>>
+			<?php echo lang('disabled') ?>
+		</option>
+	</select>
+</div>
+
+<div id='add_name'>
+	<?php echo lang('add_tbl') ?>
+	<input type="text" id="add_name_input" class="gc_tf1" /> <input
+		type="button" value="Add" onclick='add_table()' />
+</div>
+<div id="tabs">
+
+	<ul id='name_list'>
+		<?php foreach($rates as $name=>$ratelist ) {  ?>
+		<li><a href="#tbl_<?php echo $name ?>" id='label_<?php echo $name ?>'><?php echo str_replace('_', ' ', $name); ?>
+		</a></li>
+		<?php } ?>
+	</ul>
+	<?php foreach ($rates as $name=>$table) { 
+		$disp_name = str_replace('_', ' ', $name);
+		?>
+	<div id='tbl_<?php echo $name ?>'>
+		<strong><span id='<?php echo $name ?>_name'><?php echo $disp_name ?> </span>
+			<?php echo lang('rates') ?> </strong> (<a href="javascript:void(0)"
+			onclick="remove_table('tbl_<?php echo $name ?>')"><?php echo lang('btn_tbl_remove') ?>
+		</a>) (<a href="javascript:void(0)"
+			onclick="rename_table('<?php echo $name ?>')"><?php echo lang('btn_rename') ?>
+		</a>)
+		<table>
+			<tr>
+
+				<div id="rename_<?php echo $name ?>" style="display: none">
+
+					<input type="text" id="input_<?php echo $name ?>"
+						value="<?php echo $disp_name ?>" class="gc_tf1"> <input
+						type="button" value="Change"
+						onclick="apply_rename('<?php echo $name ?>', '<?php echo $name ?>')" />
+					<input type="button" value="Cancel"
+						onclick="cancel_rename('<?php echo $name ?>')" />
+				</div>
+
+				<td><?php echo lang('by_country') ?></td>
+				<td colspan="2"><select name="location[<?php echo $name ?>]">
+						<option value=''>
+							<?php echo lang('na') ?>
+						</option>
+						<?php 
+						foreach($countries as $cid=>$c_name)
+						{
+							echo '<option value="'.$cid.'"';
+							//set which option is selected
+							if(isset($settings['location'][$name]) && $settings['location'][$name]==$cid)
+							{
+								echo ' selected="selected"';
+							}
+							echo '>'.$c_name.'</option>';
+						}
+						?>
 				</select>
-			</td>
+				</td>
 			</tr>
-			
-			<td><?php echo lang('method') ?>: </td><td colspan="2">
-			<select name="method[<?php echo $name ?>]">
-			<?php 
-			$weight = '';
-			$price = '';
-			
-			//set which option is selected
-			if($settings['method'][$name] == 'weight')
-			{
-				$weight	= ' selected="selected"';
-			}
-			else
-			{
-				$price	= ' selected="selected"';
-			}
-			?>
-			<option value="price" <?php echo $price ?>><?php echo lang('price') ?></option>
-			<option value="weight" <?php echo $weight ?>><?php echo lang('weight') ?></option>
-			</select></td></tr>
-			<tr><td colspan="3"><?php echo lang('rates') ?>: </td></tr>
+
+			<td><?php echo lang('method') ?>:</td>
+			<td colspan="2"><select name="method[<?php echo $name ?>]">
+					<?php 
+					$weight = '';
+					$price = '';
+
+					//set which option is selected
+					if($settings['method'][$name] == 'weight')
+					{
+						$weight	= ' selected="selected"';
+					}
+					else
+					{
+						$price	= ' selected="selected"';
+					}
+					?>
+					<option value="price" <?php echo $price ?>>
+						<?php echo lang('price') ?>
+					</option>
+					<option value="weight" <?php echo $weight ?>>
+						<?php echo lang('weight') ?>
+					</option>
+			</select></td>
+			</tr>
+			<tr>
+				<td colspan="3"><?php echo lang('rates') ?>:</td>
+			</tr>
 			<?php 
 			$count	= 0;
-			
+
 			foreach ($table as $from => $rate)
 			{
-			?>	
-				<tr id="<?php echo $name ?>_<?php echo $count ?>">
-				<td><?php echo lang('from') ?>: <input class="gc_tf1 <?php echo $name ?>_from tablerate_input" type="text" name="from[<?php echo $name ?>][]" value="<?php echo $from ?>"/></td>
-				<td><?php echo lang('rate') ?>: <input class="gc_tf1 <?php echo $name ?>_rate tablerate_input" type="text" name="rate[<?php echo $name?>][]" value="<?php echo $rate ?>" /></td>
-				<td style="font-size:11px;"><a href="javascript:tablerate_remove('<?php echo $name ?>_<?php echo $count ?>');">(<?php echo lang('btn_remove') ?>)</a> <a href="javascript:tablerate_add_above('<?php echo $name ?>',<?php echo $count ?>)">(<?php echo lang('btn_above') ?>)</a> <a href="javascript:tablerate_add_below('<?php echo $name ?>',<?php echo $count ?>)">(<?php echo lang('btn_below') ?>)</a>
+				?>
+			<tr id="<?php echo $name ?>_<?php echo $count ?>">
+				<td><?php echo lang('from') ?>: <input
+					class="gc_tf1 <?php echo $name ?>_from tablerate_input" type="text"
+					name="from[<?php echo $name ?>][]" value="<?php echo $from ?>" /></td>
+				<td><?php echo lang('rate') ?>: <input
+					class="gc_tf1 <?php echo $name ?>_rate tablerate_input" type="text"
+					name="rate[<?php echo $name?>][]" value="<?php echo $rate ?>" /></td>
+				<td style="font-size: 11px;"><a
+					href="javascript:tablerate_remove('<?php echo $name ?>_<?php echo $count ?>');">(<?php echo lang('btn_remove') ?>)
+				</a> <a
+					href="javascript:tablerate_add_above('<?php echo $name ?>',<?php echo $count ?>)">(<?php echo lang('btn_above') ?>)
+				</a> <a
+					href="javascript:tablerate_add_below('<?php echo $name ?>',<?php echo $count ?>)">(<?php echo lang('btn_below') ?>)
+				</a>
 				</td>
-				</tr>
+			</tr>
 			<?php 
 				$count++;
 			}
 			?>
-			</table>
-		</div>
+		</table>
+	</div>
 	<?php } ?>
 
 </div>
 
 
 
-		

@@ -4,14 +4,14 @@ echo form_open_multipart($this->config->item('admin_folder') . '/digital_product
 ?>
 
 <?php if ($id == 0) : ?>
-    <label for="file"><?php echo lang('file_label'); ?> </label>
-    <?php
-    $data = array('id' => 'file', 'name' => 'userfile');
-    echo form_upload($data);
-    ?>
+<label for="file"><?php echo lang('file_label'); ?> </label>
+<?php
+$data = array('id' => 'file', 'name' => 'userfile');
+echo form_upload($data);
+?>
 <?php else : ?>
-    <label for="file"><?php echo lang('file_label'); ?> </label>
-    <?php echo $filename ?>
+<label for="file"><?php echo lang('file_label'); ?> </label>
+<?php echo $filename ?>
 <?php endif; ?>
 
 <label for="title"><?php echo lang('title'); ?> </label>
@@ -25,10 +25,11 @@ echo form_input($data);
 $data = array('id' => 'max_downloads', 'name' => 'max_downloads', 'value' => set_value('max_downloads', $max_downloads), 'class' => 'gc_tf1');
 echo form_input($data);
 ?>
-<span class="help-inline"><?php echo lang('max_downloads_note'); ?></span>
+<span class="help-inline"><?php echo lang('max_downloads_note'); ?> </span>
 
 <div class="form-actions">
-    <input class="btn btn-primary" type="submit" value="<?php echo lang('save'); ?>"/>
+	<input class="btn btn-primary" type="submit"
+		value="<?php echo lang('save'); ?>" />
 </div>
 
 </form>

@@ -1,17 +1,19 @@
 <style type="text/css">
-	.placeholder {
-		display:none;
-	}
+.placeholder {
+	display: none;
+}
 </style>
 <div class="page-header">
-	<h2><?php echo lang('form_checkout');?></h2>
+	<h2>
+		<?php echo lang('form_checkout');?>
+	</h2>
 </div>
 
 <?php if (validation_errors()):?>
-	<div class="alert alert-error">
-		<a class="close" data-dismiss="alert">×</a>
-		<?php echo validation_errors();?>
-	</div>
+<div class="alert alert-error">
+	<a class="close" data-dismiss="alert">×</a>
+	<?php echo validation_errors();?>
+</div>
 <?php endif;?>
 
 <script type="text/javascript">
@@ -116,123 +118,144 @@ $zip		= array('placeholder'=>lang('address_postcode'), 'maxlength'=>'10', 'class
 
 
 ?>
-	
-	<?php
-	//post to the correct place.
+
+<?php
+//post to the correct place.
 	echo ($address_form_prefix == 'bill')?form_open('checkout/step_1'):form_open('checkout/shipping_address');?>
+<div class="row">
+	<?php // Address form ?>
+	<div class="span8 offset2">
 		<div class="row">
-			<?php // Address form ?>
-			<div class="span8 offset2">
-				<div class="row">
-					<div class="span4">
-						<h2 style="margin:0px;">
-							<?php echo ($address_form_prefix == 'bill')?lang('address'):lang('shipping_address');?>
-						</h2>
-					</div>
-					<div class="span4">
-						<?php if($this->Customer_model->is_logged_in(false, false)) : ?>
-							<button class="btn btn-inverse pull-right" onclick="$('#address_manager').modal().modal('show');" type="button"><i class="icon-envelope icon-white"></i> <?php echo lang('choose_address');?></button>
-						<?php endif; ?>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="span8">
-						<label class="placeholder"><?php echo lang('address_company');?></label>
-						<?php echo form_input($company);?>
-					</div>
-				</div>
-				<div class="row">
-					<div class="span4">
-						<label class="placeholder"><?php echo lang('address_firstname');?><b class="r"> *</b></label>
-						<?php echo form_input($first);?>
-					</div>
-					<div class="span4">
-						<label class="placeholder"><?php echo lang('address_lastname');?><b class="r"> *</b></label>
-						<?php echo form_input($last);?>
-					</div>
-				</div>
-				<div class="row">
-					<div class="span4">
-						<label class="placeholder"><?php echo lang('address_email');?><b class="r"> *</b></label>
-						<?php echo form_input($email);?>
-					</div>
-
-					<div class="span4">
-						<label class="placeholder"><?php echo lang('address_phone');?><b class="r"> *</b></label>
-						<?php echo form_input($phone);?>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="span8">
-						<label class="placeholder"><?php echo lang('address_country');?><b class="r"> *</b></label>
-						<?php echo form_dropdown('country_id',$countries, @$customer[$address_form_prefix.'_address']['country_id'], 'id="country_id" class="address span8"');?>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="span8">
-						<label class="placeholder"><?php echo lang('address1');?><b class="r"> *</b></label>
-						<?php echo form_input($address1);?>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="span8">
-						<label class="placeholder"><?php echo lang('address2');?></label>
-						<?php echo form_input($address2);?>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="span3">
-						<label class="placeholder"><?php echo lang('address_city');?><b class="r"> *</b></label>
-						<?php echo form_input($city);?>
-					</div>
-					<div class="span3">
-						<label class="placeholder"><?php echo lang('address_state');?><b class="r"> *</b></label>
-						<?php echo form_dropdown('zone_id',$zone_menu, @$customer[$address_form_prefix.'_address']['zone_id'], 'id="zone_id" class="address span3"');?>
-					</div>
-					<div class="span2">
-						<label class="placeholder"><?php echo lang('address_postcode');?><b class="r"> *</b></label>
-						<?php echo form_input($zip);?>
-					</div>
-				</div>
-			
-				<div class="row">
-					<div class="span8">
-						<input class="btn btn-block btn-large btn-primary" type="submit" value="<?php echo lang('form_continue');?>"/>
-					</div>
-				</div>
+			<div class="span4">
+				<h2 style="margin: 0px;">
+					<?php echo ($address_form_prefix == 'bill')?lang('address'):lang('shipping_address');?>
+				</h2>
+			</div>
+			<div class="span4">
+				<?php if($this->Customer_model->is_logged_in(false, false)) : ?>
+				<button class="btn btn-inverse pull-right"
+					onclick="$('#address_manager').modal().modal('show');"
+					type="button">
+					<i class="icon-envelope icon-white"></i>
+					<?php echo lang('choose_address');?>
+				</button>
+				<?php endif; ?>
 			</div>
 		</div>
-	</form>
+
+		<div class="row">
+			<div class="span8">
+				<label class="placeholder"><?php echo lang('address_company');?> </label>
+				<?php echo form_input($company);?>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span4">
+				<label class="placeholder"><?php echo lang('address_firstname');?><b
+					class="r"> *</b> </label>
+				<?php echo form_input($first);?>
+			</div>
+			<div class="span4">
+				<label class="placeholder"><?php echo lang('address_lastname');?><b
+					class="r"> *</b> </label>
+				<?php echo form_input($last);?>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span4">
+				<label class="placeholder"><?php echo lang('address_email');?><b
+					class="r"> *</b> </label>
+				<?php echo form_input($email);?>
+			</div>
+
+			<div class="span4">
+				<label class="placeholder"><?php echo lang('address_phone');?><b
+					class="r"> *</b> </label>
+				<?php echo form_input($phone);?>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="span8">
+				<label class="placeholder"><?php echo lang('address_country');?><b
+					class="r"> *</b> </label>
+				<?php echo form_dropdown('country_id',$countries, @$customer[$address_form_prefix.'_address']['country_id'], 'id="country_id" class="address span8"');?>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="span8">
+				<label class="placeholder"><?php echo lang('address1');?><b
+					class="r"> *</b> </label>
+				<?php echo form_input($address1);?>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="span8">
+				<label class="placeholder"><?php echo lang('address2');?> </label>
+				<?php echo form_input($address2);?>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="span3">
+				<label class="placeholder"><?php echo lang('address_city');?><b
+					class="r"> *</b> </label>
+				<?php echo form_input($city);?>
+			</div>
+			<div class="span3">
+				<label class="placeholder"><?php echo lang('address_state');?><b
+					class="r"> *</b> </label>
+				<?php echo form_dropdown('zone_id',$zone_menu, @$customer[$address_form_prefix.'_address']['zone_id'], 'id="zone_id" class="address span3"');?>
+			</div>
+			<div class="span2">
+				<label class="placeholder"><?php echo lang('address_postcode');?><b
+					class="r"> *</b> </label>
+				<?php echo form_input($zip);?>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="span8">
+				<input class="btn btn-block btn-large btn-primary" type="submit"
+					value="<?php echo lang('form_continue');?>" />
+			</div>
+		</div>
+	</div>
+</div>
+</form>
 
 <?php if($this->Customer_model->is_logged_in(false, false)) : ?>
 
 <div class="modal hide" id="address_manager">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">×</button>
-		<h3><?php echo lang('your_addresses');?></h3>
+		<h3>
+			<?php echo lang('your_addresses');?>
+		</h3>
 	</div>
 	<div class="modal-body">
 		<p>
-			<table class="table table-striped">
+		
+		
+		<table class="table table-striped">
 			<?php
 			$c = 1;
 			foreach($customer_addresses as $a):?>
-				<tr>
-					<td>
-						<?php
-						$b	= $a['field_data'];
-						echo nl2br(format_address($b));
-						?>
-					</td>
-					<td style="width:100px;"><input type="button" class="btn btn-primary choose_address pull-right" onclick="populate_address(<?php echo $a['id'];?>);" data-dismiss="modal" value="<?php echo lang('form_choose');?>" /></td>
-				</tr>
+			<tr>
+				<td><?php
+				$b	= $a['field_data'];
+				echo nl2br(format_address($b));
+				?>
+				</td>
+				<td style="width: 100px;"><input type="button"
+					class="btn btn-primary choose_address pull-right"
+					onclick="populate_address(<?php echo $a['id'];?>);"
+					data-dismiss="modal" value="<?php echo lang('form_choose');?>" /></td>
+			</tr>
 			<?php endforeach;?>
-			</table>
+		</table>
 		</p>
 	</div>
 	<div class="modal-footer">

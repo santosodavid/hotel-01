@@ -4,7 +4,7 @@ class Shipping
 {
 	var $CI;
 	var $cart;
-	
+
 	function __construct()
 	{
 		$this->CI =& get_instance();
@@ -12,30 +12,30 @@ class Shipping
 		$this->CI->load->model('Cart_model');
 		$this->cart = $this->CI->session->userdata('cart');
 	}
-	
+
 	function get_flatrate()
 	{
 		return 10.00;
 	}
-	
+
 	function get_tablerate()
 	{
-		
+
 		//$method either equals weight or price
 		$method	= 'price';
 		$table	= array(
-		 '80'	=> '85.00'
-		,'70'	=> '65.00'
-		,'60'	=> '55.00'
-		,'50'	=> '55.00'
-		,'40'	=> '45.00'
-		,'30'	=> '35.00'
-		,'20'	=> '25.00'
-		,'10'	=> '15.00'
-		,'0'	=> '5.00'
+				'80'	=> '85.00'
+				,'70'	=> '65.00'
+				,'60'	=> '55.00'
+				,'50'	=> '55.00'
+				,'40'	=> '45.00'
+				,'30'	=> '35.00'
+				,'20'	=> '25.00'
+				,'10'	=> '15.00'
+				,'0'	=> '5.00'
 		);
-		
-		
+
+
 		if ($method == 'weight')
 		{
 			$order_weight	= $this->CI->Cart_model->get_order_weight();
@@ -66,7 +66,7 @@ class Shipping
 			return $shipping_price;
 		}
 	}
-	
+
 	function _get_order_weight()
 	{
 		$order_weight	= 0;
@@ -75,10 +75,10 @@ class Shipping
 			$item_weight	= $item['weight']*$item['quantity'];
 			$order_weight		= $order_weight + $item_weight;
 		}
-		
+
 		return $order_weight;
 	}
-	
+
 	function _get_order_price()
 	{
 		$order_price	= 0;
@@ -87,7 +87,7 @@ class Shipping
 			$item_price	= $item['price']*$item['quantity'];
 			$order_price	= $order_price + $item_price;
 		}
-		
+
 		return $order_price;
 	}
 }
