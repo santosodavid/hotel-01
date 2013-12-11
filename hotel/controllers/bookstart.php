@@ -1,6 +1,6 @@
 <?php 
 
-class Book extends Front_Controller {
+class Bookstart extends Front_Controller {
 
 	function __construct()
 	{
@@ -13,8 +13,8 @@ class Book extends Front_Controller {
 
 	function index(){
 		//$data['homepage']		= true;
-		$data['active']			= "";
+		$data['active']			= "Book";
 
-		$this->load->view('book', $data);
+		$this->load->view('bookstart', $data);
 	}
 }

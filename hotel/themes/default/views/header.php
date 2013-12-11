@@ -63,7 +63,7 @@ div.ui-datepicker {
 								<li <?php echo ($active == "Home") ? "class='active'" : ""; ?>><a
 									href="home">Home</a></li>
 								<li <?php echo ($active == "Rooms") ? "class='active'" : ""; ?>><a
-									href="rooms.html">Rooms</a></li>
+									href="rooms">Rooms</a></li>
 								<li
 								<?php echo ($active == "Facilities") ? "class='active'" : ""; ?>><a
 									href="facilities.html">Facilities</a></li>
@@ -73,7 +73,7 @@ div.ui-datepicker {
 								<li <?php echo ($active == "Map") ? "class='active'" : ""; ?>><a
 									href="map.html">Map</a></li>
 								<li <?php echo ($active == "Book") ? "class='active'" : ""; ?>><a
-									href="book-start.html">Book</a></li>
+									href="bookstart">Book</a></li>
 							</ul>
 						</div>
 						<!-- /.nav-collapse -->

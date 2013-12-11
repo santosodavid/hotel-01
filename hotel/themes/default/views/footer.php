@@ -1,4 +1,29 @@
 <?php $CI = & get_instance(); ?>
+<div class="row">
+	<div class="span12 what_people_say">
+		<div id="quotes">
+			<blockquote class="textItem" style="display: none;">
+				<p>This is the best hotel I've ever been to.</p>
+				<small>Someone famous <cite title="Source Title">Source Title</cite>
+				</small>
+			</blockquote>
+
+			<blockquote class="textItem" style="display: none;">
+				<p>The food is incredible.</p>
+				<small>Someone famous <cite title="Source Title">Source Title</cite>
+				</small>
+			</blockquote>
+
+			<blockquote class="textItem" style="display: none;">
+				<p>Beyond All Expectations</p>
+				<small>Someone famous <cite title="Source Title">Source Title</cite>
+				</small>
+			</blockquote>
+		</div>
+	</div>
+</div>
+</div>
+
 <footer>
 	<div class="container">
 		<div class="row footer_section_pre">

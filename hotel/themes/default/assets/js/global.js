@@ -262,7 +262,7 @@ jQuery(window).load(function() {
 // DOMContentLoaded
 $(function() {
 
-	update_total_price();
+	//update_total_price();
 
 	/*
 	 * if($('.home').length > 0) { var position_top =
