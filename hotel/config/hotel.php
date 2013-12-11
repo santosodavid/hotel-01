@@ -14,6 +14,8 @@ $config['city']				= 'Batam';
 $config['state']			= 'Kepulauan Riau';
 $config['zip']				= '29432';
 $config['email']			= 'admin@hotel-01.com';
+$config['telp']				= '(0778) 897-987';
+$config['fax']				= '(0778) 897-988';
 
 // Store currency
 $config['currency']			= 'IDR';  // USD, EUR, etc

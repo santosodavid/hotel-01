@@ -81,9 +81,10 @@
 
                         <div class="nav-collapse">
                             <ul class="nav">
-                                <li><a href="<?php echo $admin_url; ?>"><?php echo lang('common_home'); ?></a></li>
+                                <li>
+                                <a href="<?php echo $admin_url; ?>"><?php echo lang('common_home'); ?></a></li>
                                 <li class="dropdown">
-                                    <li><a href="<?php echo $admin_url; ?>orders"><?php echo lang('common_reservations') ?></a></li>
+                                	<li><a href="<?php echo $admin_url; ?>orders"><?php echo lang('common_reservations') ?></a></li>
                                 </li>
 
                                 <?php

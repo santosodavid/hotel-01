@@ -7,8 +7,12 @@ Admin Product Language
 
 $lang['posts']					= 'Posts';
 $lang['post_form']				= 'Add New Post';
-$lang['code']                                   = 'Code';
-$lang['weekendprice']                                = 'Weekend of Price';
+$lang['edit_post_form']			= 'Edit Post';
+$lang['code']					= 'Code';
+$lang['weekendprice']			= 'Weekend of Price';
+$lang['adults']					= 'Adults';
+$lang['kids']					= 'Kids';
+$lang['room_information']			= 'Room Information';
 
 
 $lang['products']					= 'Posts';

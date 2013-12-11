@@ -13,7 +13,7 @@
 			<?php /*<td style="width:16px;"><?php echo  $customer->id; ?></td>*/?>
 			<td><?php echo  $b->sku; ?></td>
 			<td><?php echo  $b->name; ?></td>
-			<td><?php echo $b->quantity_sold; ?></a></td>
+			<td><?php echo $b->quantity_sold; ?></td>
 		</tr>
 		<?php endforeach;?>
 	</tbody>

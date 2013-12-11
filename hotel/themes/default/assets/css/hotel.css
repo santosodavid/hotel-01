@@ -8602,10 +8602,10 @@ form.book_now {
     font-weight: bold;
 }
 .price {
-    font-size: 36px;
+    font-size: 26px;
     line-height: 40px;
     text-align: left;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     color: inherit;
     font-family: inherit;
     font-weight: 100;
